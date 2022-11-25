@@ -1,5 +1,5 @@
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import gql from 'graphql-tag';
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import gql from "graphql-tag";
 const typeDefs = gql`
   type Query {
     hello: String!
@@ -8,7 +8,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    hello: () => 'Hello World!',
+    hello: () => "Hello World!",
   },
 };
 
