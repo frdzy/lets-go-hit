@@ -1,10 +1,11 @@
 import express from "express";
 import { createYoga } from "graphql-yoga";
+import { createContext } from "./context";
 import { schema } from "./schema";
 
 function main() {
   const app = express();
-  const yoga = createYoga({ schema });
+  const yoga = createYoga({ schema, context: createContext() });
   app.use("/graphql", yoga);
   app.get("/", (req, res) => {
     res.redirect("/graphql");
