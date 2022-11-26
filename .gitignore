@@ -106,3 +106,4 @@ dist
 # MANUAL: prisma
 *.env*
 *.db
+*.db-journal
