@@ -1,11 +1,15 @@
+import express from "express";
 import { createYoga } from "graphql-yoga";
-import { createServer } from "http";
 import { schema } from "./schema";
 
 function main() {
-  const yoga = createYoga({ schema, graphqlEndpoint: "/" });
-  const server = createServer(yoga);
-  server.listen(4000, () => {
+  const app = express();
+  const yoga = createYoga({ schema });
+  app.use("/graphql", yoga);
+  app.get("/", (req, res) => {
+    res.redirect("/graphql");
+  });
+  app.listen(4000, () => {
     console.info("Server is running on http://localhost:4000/graphql");
   });
 }
