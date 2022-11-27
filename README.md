@@ -8,4 +8,5 @@ TODOs:
 - [x] Script to inject test data
 - [x] GraphQL backend to fetch data
 - [x] GraphQL backend to create confirmation
-- [ ] GraphQL backend to create reservation
+- [x] GraphQL backend to create reservation
+- [x] GraphQL backend to create schedule without reservation
