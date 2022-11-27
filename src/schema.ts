@@ -40,21 +40,59 @@ const typeDefs = gql`
     users: [User]
     courtLocations: [CourtLocation]
   }
+
+  type Mutation {
+    confirmWithEmail(
+      scheduleId: ID!
+      name: String!
+      email: String!
+    ): Confirmation
+  }
 `;
 
 const resolvers = {
   Query: {
-    users: (_parent: unknown, _args: {}, context: GraphQLContext) =>
-      context.prisma.user.findMany(),
-    courtLocations: (_parent: unknown, _args: {}, context: GraphQLContext) =>
-      context.prisma.courtLocation.findMany(),
+    users: (_parent: unknown, _args: {}, { prisma }: GraphQLContext) =>
+      prisma.user.findMany(),
+    courtLocations: (_parent: unknown, _args: {}, { prisma }: GraphQLContext) =>
+      prisma.courtLocation.findMany(),
+  },
+  Mutation: {
+    confirmWithEmail: async (
+      _parent: unknown,
+      args: { scheduleId: string; name: string; email: string },
+      { prisma }: GraphQLContext
+    ) => {
+      const { scheduleId, name, email } = args;
+      let user = await prisma.user.findFirst({
+        where: { email },
+      });
+      if (!user) {
+        user = await prisma.user.create({
+          data: {
+            email,
+            name,
+          },
+        });
+      }
+      return await prisma.confirmation.create({
+        data: {
+          scheduleId,
+          playerId: user.id,
+          status: "confirmed",
+        },
+        include: {
+          player: true,
+        },
+      });
+    },
   },
   User: {
     id: (parent: User) => parent.id,
     email: (parent: User) => parent.email,
     name: (parent: User) => parent.name,
-    schedules: async (parent: User, _args: {}, context: GraphQLContext) => {
-      const results = await context.prisma.confirmation.findMany({
+    schedules: async (parent: User, _args: {}, { prisma }: GraphQLContext) => {
+      const results = await prisma.confirmation.findMany({
         where: {
           playerId: parent.id,
         },
@@ -67,9 +105,9 @@ const resolvers = {
   },
   Schedule: {
     id: (parent: Schedule) => parent.id,
-    reservation: (parent: Schedule, _args: {}, context: GraphQLContext) =>
+    reservation: (parent: Schedule, _args: {}, { prisma }: GraphQLContext) =>
       parent.reservationId
-        ? context.prisma.reservation.findFirst({
+        ? prisma.reservation.findFirst({
             where: {
               id: parent.reservationId,
             },
@@ -79,8 +117,8 @@ const resolvers = {
             },
           })
         : null,
-    confirmations: (parent: Schedule, _args: {}, context: GraphQLContext) =>
-      context.prisma.confirmation.findMany({
+    confirmations: (parent: Schedule, _args: {}, { prisma }: GraphQLContext) =>
+      prisma.confirmation.findMany({
         where: {
           scheduleId: parent.id,
         },

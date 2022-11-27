@@ -7,3 +7,5 @@ TODOs:
 - [x] Schema for users, courts, availabilities, and schedules
 - [x] Script to inject test data
 - [x] GraphQL backend to fetch data
+- [x] GraphQL backend to create confirmation
+- [ ] GraphQL backend to create reservation
