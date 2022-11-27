@@ -16,7 +16,7 @@ model User {
   name                String?
   courtLocationsAdded CourtLocation[]
   reservations        Reservation[]
-  schedules           Schedule[]
+  createdSchedules    Schedule[]
   confirmations       Confirmation[]
 }
 
@@ -46,8 +46,8 @@ model Schedule {
   beginTimestamp  DateTime
   reservation     Reservation?   @relation(fields: [reservationId], references: [id])
   reservationId   String?
-  byUser          User           @relation(fields: [byUserId], references: [id])
-  byUserId        String
+  createdByUser   User           @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String
   confirmations   Confirmation[]
 }
 
