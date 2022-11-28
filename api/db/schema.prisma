@@ -1,18 +1,62 @@
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String  @id @default(uuid())
+  email               String  @unique
+  name                String?
+  courtLocationsAdded CourtLocation[]
+  reservations        Reservation[]
+  createdSchedules    Schedule[]
+  confirmations       Confirmation[]
+}
+
+model CourtLocation {
+  id              String  @id @default(uuid())
+  name            String
+  address         String?
+  notes           String?
+  addedBy         User?   @relation(fields: [addedById], references: [id])
+  addedById       String?
+  reservations    Reservation[]
+}
+
+model Reservation {
+  id              String         @id @default(uuid())
+  beginTimestamp  DateTime
+  endTimestamp    DateTime
+  courtLocation   CourtLocation  @relation(fields: [courtLocationId], references: [id])
+  courtLocationId String
+  byUser          User           @relation(fields: [byUserId], references: [id])
+  byUserId        String
+  schedules       Schedule[]
+}
+
+model Schedule {
+  id              String         @id @default(uuid())
+  beginTimestamp  DateTime
+  reservation     Reservation?   @relation(fields: [reservationId], references: [id])
+  reservationId   String?
+  createdByUser   User           @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String
+  confirmations   Confirmation[]
+}
+
+model Confirmation {
+  id            String           @id @default(uuid())
+  player        User             @relation(fields: [playerId], references: [id])
+  playerId      String
+  status        String?
+  schedule      Schedule         @relation(fields: [scheduleId], references: [id])
+  scheduleId    String
 }
