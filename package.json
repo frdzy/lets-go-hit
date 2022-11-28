@@ -1,25 +1,26 @@
 {
   "name": "lets-go-hit",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development ts-node-dev --exit-child --respawn src/main.ts",
-    "start": "ts-node src/main.ts"
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "api",
+      "web",
+      "packages/*"
+    ]
   },
   "devDependencies": {
-    "@types/express": "^4.17.14",
-    "@types/node": "^18.11.9",
-    "cross-env": "^7.0.3",
-    "prettier": "^2.8.0",
-    "prisma": "^4.6.1",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^4.9.3"
+    "@redwoodjs/core": "3.5.0"
   },
-  "dependencies": {
-    "@graphql-tools/schema": "^9.0.10",
-    "@prisma/client": "4.6.1",
-    "express": "^4.18.2",
-    "graphql": "^16.6.0",
-    "graphql-tag": "^2.12.6",
-    "graphql-yoga": "^3.1.0"
-  }
+  "eslintConfig": {
+    "extends": "@redwoodjs/eslint-config",
+    "root": true
+  },
+  "engines": {
+    "node": ">=14.19 <=16.x",
+    "yarn": ">=1.15"
+  },
+  "prisma": {
+    "seed": "yarn rw exec seed"
+  },
+  "packageManager": "yarn@3.2.4"
 }
