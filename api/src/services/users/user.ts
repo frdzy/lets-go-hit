@@ -1,11 +1,13 @@
-import type { User } from "@prisma/client";
+import type { User as TUser } from "@prisma/client";
 import { db } from "src/lib/db";
 
-export const user = {
-  id: (parent: User) => parent.id,
-  email: (parent: User) => parent.email,
-  name: (parent: User) => parent.name,
-  schedules: async (parent: User, _args: {}) => {
+export const User = {
+  id: (_args: unknown, { root: parent }: { root: TUser }) => {
+    return parent.id;
+  },
+  email: (_args: unknown, { root: parent }: { root: TUser }) => parent.email,
+  name: (_args: unknown, { root: parent }: { root: TUser }) => parent.name,
+  schedules: async (_argus: unknown, { root: parent }: { root: TUser }) => {
     const results = await db.confirmation.findMany({
       where: {
         playerId: parent.id,

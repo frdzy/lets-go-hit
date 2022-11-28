@@ -1,15 +1,17 @@
-import type { Reservation } from "@prisma/client";
+import type { Reservation as TReservation } from "@prisma/client";
 import { db } from "src/lib/db";
 
-export const reservation = {
-  id: (parent: Reservation) => parent.id,
-  beginTimestamp: (parent: Reservation) => parent.beginTimestamp,
-  endTimestamp: (parent: Reservation) => parent.endTimestamp,
-  courtLocation: (parent: Reservation, _args: {}) =>
+export const Reservation = {
+  id: (_args: unknown, { root: parent }: { root: TReservation }) => parent.id,
+  beginTimestamp: (_args: unknown, { root: parent }: { root: TReservation }) =>
+    parent.beginTimestamp,
+  endTimestamp: (_args: unknown, { root: parent }: { root: TReservation }) =>
+    parent.endTimestamp,
+  courtLocation: (_args: unknown, { root: parent }: { root: TReservation }) =>
     db.courtLocation.findFirstOrThrow({
       where: { id: parent.courtLocationId },
     }),
-  byUser: (parent: Reservation, _args: {}) =>
+  byUser: (_args: unknown, { root: parent }: { root: TReservation }) =>
     db.user.findFirstOrThrow({
       where: { id: parent.byUserId },
     }),

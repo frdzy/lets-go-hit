@@ -1,9 +1,9 @@
-import type { Schedule } from "@prisma/client";
+import type { Schedule as TSchedule } from "@prisma/client";
 import { db } from "src/lib/db";
 
-export const schedule = {
-  id: (parent: Schedule) => parent.id,
-  reservation: (parent: Schedule, _args: {}) =>
+export const Schedule = {
+  id: (_args: unknown, { root: parent }: { root: TSchedule }) => parent.id,
+  reservation: (_args: unknown, { root: parent }: { root: TSchedule }) =>
     parent.reservationId
       ? db.reservation.findFirst({
           where: {
@@ -15,7 +15,7 @@ export const schedule = {
           },
         })
       : null,
-  confirmations: (parent: Schedule, _args: {}) =>
+  confirmations: (_args: unknown, { root: parent }: { root: TSchedule }) =>
     db.confirmation.findMany({
       where: {
         scheduleId: parent.id,
