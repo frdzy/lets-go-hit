@@ -17,6 +17,17 @@ export const Reservation = {
     }),
 };
 
+export const reservation = async (
+  _parent: unknown,
+  args: {
+    id: string;
+  }
+) =>
+  await db.reservation.findFirst({
+    where: { id: args.id },
+    include: { courtLocation: true },
+  });
+
 export const createReservation = async (
   _parent: unknown,
   args: {

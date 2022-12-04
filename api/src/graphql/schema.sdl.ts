@@ -40,6 +40,7 @@ export const schema = gql`
     users: [User] @skipAuth
     courtLocations: [CourtLocation] @skipAuth
     schedules: [Schedule] @skipAuth
+    reservation(id: ID!): Reservation @skipAuth
   }
 
   type Mutation {

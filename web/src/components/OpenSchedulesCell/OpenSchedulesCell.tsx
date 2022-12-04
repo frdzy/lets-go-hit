@@ -1,5 +1,8 @@
 import type { OpenSchedulesQuery } from "types/graphql";
 import type { CellSuccessProps, CellFailureProps } from "@redwoodjs/web";
+import ReservationCell from "src/components/ReservationCell";
+import { useCallback } from "react";
+import { DateLabel } from "src/components/date";
 
 export const QUERY = gql`
   query OpenSchedulesQuery {
@@ -7,6 +10,10 @@ export const QUERY = gql`
       id
       beginTimestamp
       createdByUser {
+        id
+        name
+      }
+      reservation {
         id
       }
     }
@@ -24,13 +31,27 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   schedules,
 }: CellSuccessProps<OpenSchedulesQuery>) => {
+  const handleSchedule = useCallback(() => {
+    console.log("WIP");
+  }, []);
   return (
     <ul>
       {schedules.map((item) => {
         return (
-          <li key={item.id}>
-            <textarea>{JSON.stringify(item, null, 2)}</textarea>
-          </li>
+          <article key={item.id}>
+            <header>
+              <h2>
+                <DateLabel isoTimestamp={item.beginTimestamp} /> with{" "}
+                {item.createdByUser.name ?? "Unknown Player"}
+              </h2>
+            </header>
+            {item.reservation ? (
+              <ReservationCell id={item.reservation.id} />
+            ) : (
+              <div>No Reservation</div>
+            )}
+            <button onClick={handleSchedule}>Schedule</button>
+          </article>
         );
       })}
     </ul>
