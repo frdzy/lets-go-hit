@@ -5,6 +5,10 @@ export const QUERY = gql`
   query OpenSchedulesQuery {
     schedules {
       id
+      beginTimestamp
+      createdByUser {
+        id
+      }
     }
   }
 `;
@@ -23,7 +27,11 @@ export const Success = ({
   return (
     <ul>
       {schedules.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>;
+        return (
+          <li key={item.id}>
+            <textarea>{JSON.stringify(item, null, 2)}</textarea>
+          </li>
+        );
       })}
     </ul>
   );

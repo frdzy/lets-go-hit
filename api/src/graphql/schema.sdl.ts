@@ -24,6 +24,8 @@ export const schema = gql`
 
   type Schedule {
     id: ID!
+    beginTimestamp: String!
+    createdByUser: User!
     reservation: Reservation
     confirmations: [Confirmation]
   }

@@ -19,3 +19,5 @@ export const User = {
     return results.map((r) => r.schedule);
   },
 };
+
+export const users = (_parent: unknown, _args: {}) => db.user.findMany();
