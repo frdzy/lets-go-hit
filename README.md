@@ -11,3 +11,4 @@ TODOs:
 - [x] GraphQL backend to create reservation
 - [x] GraphQL backend to create schedule without reservation
 - [x] [RedwoodJS](https://redwoodjs.com)
+- [ ] Frontend to show currently open schedules

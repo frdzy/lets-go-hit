@@ -1,5 +1,8 @@
 import { db } from "src/lib/db";
 
+export const schedules = (_parent: unknown, _args: {}) =>
+  db.schedule.findMany();
+
 export const createScheduleWithoutReservation = async (
   _parent: unknown,
   args: { beginTimestamp: string; createdByUserId: string }

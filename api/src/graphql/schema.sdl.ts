@@ -37,6 +37,7 @@ export const schema = gql`
   type Query {
     users: [User] @skipAuth
     courtLocations: [CourtLocation] @skipAuth
+    schedules: [Schedule] @skipAuth
   }
 
   type Mutation {
