@@ -15,6 +15,7 @@ const Routes = () => {
     <Router>
       <Set wrap={AppLayout}>
         <Route path="/" page={HomePage} name="home" />
+        <Route path="/schedule/{id}" page={SchedulePage} name="schedule" />
         <Route path="/schedules" page={SchedulesPage} name="schedules" />
       </Set>
       <Route notfound page={NotFoundPage} />

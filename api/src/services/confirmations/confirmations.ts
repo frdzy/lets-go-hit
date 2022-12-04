@@ -43,8 +43,8 @@ export const deleteConfirmation: MutationResolvers["deleteConfirmation"] = ({
 };
 
 export const confirmWithEmail: MutationResolvers["confirmWithEmail"] =
-  async (args: { scheduleId: string; name: string; email: string }) => {
-    const { scheduleId, name, email } = args;
+  async (args: {input: { scheduleId: string; name: string; email: string }}) => {
+    const { scheduleId, name, email } = args.input;
     let user = await db.user.findFirst({
       where: { email },
     });

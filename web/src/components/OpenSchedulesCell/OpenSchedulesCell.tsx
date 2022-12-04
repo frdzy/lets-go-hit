@@ -1,21 +1,12 @@
-import type { OpenSchedulesQuery } from "types/graphql";
+import { Link, routes } from "@redwoodjs/router";
 import type { CellSuccessProps, CellFailureProps } from "@redwoodjs/web";
-import ReservationCell from "src/components/ReservationCell";
-import { useCallback } from "react";
-import { DateLabel } from "src/components/date";
+import ScheduleCell from "src/components/ScheduleCell";
+import type { OpenSchedulesQuery } from "types/graphql";
 
 export const QUERY = gql`
   query OpenSchedulesQuery {
     schedules {
       id
-      beginTimestamp
-      createdByUser {
-        id
-        name
-      }
-      reservation {
-        id
-      }
     }
   }
 `;
@@ -31,27 +22,19 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   schedules,
 }: CellSuccessProps<OpenSchedulesQuery>) => {
-  const handleSchedule = useCallback(() => {
-    console.log("WIP");
-  }, []);
   return (
     <ul>
       {schedules.map((item) => {
         return (
-          <article key={item.id}>
-            <header>
-              <h2>
-                <DateLabel isoTimestamp={item.beginTimestamp} /> with{" "}
-                {item.createdByUser.name ?? "Unknown Player"}
-              </h2>
-            </header>
-            {item.reservation ? (
-              <ReservationCell id={item.reservation.id} />
-            ) : (
-              <div>No Reservation</div>
-            )}
-            <button onClick={handleSchedule}>Schedule</button>
-          </article>
+          <ScheduleCell key={item.id} id={item.id}>
+            <Link
+              to={routes.schedule({
+                id: item.id,
+              })}
+            >
+              Sign Up
+            </Link>
+          </ScheduleCell>
         );
       })}
     </ul>
