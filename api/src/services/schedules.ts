@@ -1,5 +1,6 @@
 import type { Schedule as TSchedule } from "@prisma/client";
 import { db } from "src/lib/db";
+import { MutationResolvers, QueryResolvers } from "types/graphql";
 
 export const Schedule = {
   id: (_args: unknown, { root: parent }: { root: TSchedule }) => parent.id,
@@ -30,22 +31,22 @@ export const Schedule = {
     }),
 };
 
-export const schedules = (_parent: unknown, _args: {}) =>
-  db.schedule.findMany();
-
-export const createScheduleWithoutReservation = async (
+export const schedules: QueryResolvers["schedules"] = (
   _parent: unknown,
-  args: { beginTimestamp: string; createdByUserId: string }
-) => {
-  const schedule = await db.schedule.create({
-    data: args,
-  });
-  await db.confirmation.create({
-    data: {
-      scheduleId: schedule.id,
-      playerId: args.createdByUserId,
-      status: "confirmed",
-    },
-  });
-  return schedule;
-};
+  _args: {}
+) => db.schedule.findMany();
+
+export const createScheduleWithoutReservation: MutationResolvers["createScheduleWithoutReservation"] =
+  async (args: { beginTimestamp: string; createdByUserId: string }) => {
+    const schedule = await db.schedule.create({
+      data: args,
+    });
+    await db.confirmation.create({
+      data: {
+        scheduleId: schedule.id,
+        playerId: args.createdByUserId,
+        status: "confirmed",
+      },
+    });
+    return schedule;
+  };

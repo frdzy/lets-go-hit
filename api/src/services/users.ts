@@ -1,5 +1,6 @@
 import type { User as TUser } from "@prisma/client";
 import { db } from "src/lib/db";
+import { QueryResolvers } from "types/graphql";
 
 export const User = {
   id: (_args: unknown, { root: parent }: { root: TUser }) => {
@@ -20,4 +21,5 @@ export const User = {
   },
 };
 
-export const users = (_parent: unknown, _args: {}) => db.user.findMany();
+export const users: QueryResolvers["users"] = (_parent: unknown, _args: {}) =>
+  db.user.findMany();

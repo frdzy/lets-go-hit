@@ -53,7 +53,7 @@ export const schema = gql`
 
     createScheduleWithoutReservation(
       beginTimestamp: String!
-      byUserId: ID!
+      createdByUserId: ID!
     ): Schedule @skipAuth
 
     confirmWithEmail(
