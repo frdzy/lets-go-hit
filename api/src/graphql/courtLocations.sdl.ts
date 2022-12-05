@@ -1,40 +1,40 @@
 export const schema = gql`
   type CourtLocation {
-    id: String!
+    id: ID!
     name: String!
     address: String
     notes: String
     addedBy: User
-    addedById: String
+    addedById: ID
     reservations: [Reservation]!
   }
 
   type Query {
     courtLocations: [CourtLocation!]! @requireAuth
-    courtLocation(id: String!): CourtLocation @requireAuth
+    courtLocation(id: ID!): CourtLocation @requireAuth
   }
 
   input CreateCourtLocationInput {
     name: String!
     address: String
     notes: String
-    addedById: String
+    addedById: ID
   }
 
   input UpdateCourtLocationInput {
     name: String
     address: String
     notes: String
-    addedById: String
+    addedById: ID
   }
 
   type Mutation {
     createCourtLocation(input: CreateCourtLocationInput!): CourtLocation!
       @requireAuth
     updateCourtLocation(
-      id: String!
+      id: ID!
       input: UpdateCourtLocationInput!
     ): CourtLocation! @requireAuth
-    deleteCourtLocation(id: String!): CourtLocation! @requireAuth
+    deleteCourtLocation(id: ID!): CourtLocation! @requireAuth
   }
 `;

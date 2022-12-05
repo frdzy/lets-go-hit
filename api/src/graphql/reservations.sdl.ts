@@ -1,40 +1,40 @@
 export const schema = gql`
   type Reservation {
-    id: String!
+    id: ID!
     beginTimestamp: DateTime!
     endTimestamp: DateTime!
     courtLocation: CourtLocation!
-    courtLocationId: String!
+    courtLocationId: ID!
     byUser: User!
-    byUserId: String!
+    byUserId: ID!
     schedules: [Schedule]!
   }
 
   type Query {
     reservations: [Reservation!]! @requireAuth
-    reservation(id: String!): Reservation @requireAuth
+    reservation(id: ID!): Reservation @requireAuth
   }
 
   input CreateReservationInput {
     beginTimestamp: DateTime!
     endTimestamp: DateTime!
-    courtLocationId: String!
-    byUserId: String!
+    courtLocationId: ID!
+    byUserId: ID!
   }
 
   input UpdateReservationInput {
     beginTimestamp: DateTime
     endTimestamp: DateTime
-    courtLocationId: String
-    byUserId: String
+    courtLocationId: ID
+    byUserId: ID
   }
 
   type Mutation {
     createReservation(input: CreateReservationInput!): Reservation! @requireAuth
     updateReservation(
-      id: String!
+      id: ID!
       input: UpdateReservationInput!
     ): Reservation! @requireAuth
-    deleteReservation(id: String!): Reservation! @requireAuth
+    deleteReservation(id: ID!): Reservation! @requireAuth
   }
 `;

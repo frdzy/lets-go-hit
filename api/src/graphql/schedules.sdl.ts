@@ -1,36 +1,36 @@
 export const schema = gql`
   type Schedule {
-    id: String!
+    id: ID!
     beginTimestamp: DateTime!
     reservation: Reservation
-    reservationId: String
+    reservationId: ID
     createdByUser: User!
-    createdByUserId: String!
+    createdByUserId: ID!
     confirmations: [Confirmation]!
   }
 
   type Query {
     schedules: [Schedule!]! @requireAuth
-    schedule(id: String!): Schedule @requireAuth
+    schedule(id: ID!): Schedule @requireAuth
   }
 
   input CreateScheduleInput {
     beginTimestamp: DateTime!
-    reservationId: String
-    createdByUserId: String!
+    reservationId: ID
+    createdByUserId: ID!
   }
 
   input UpdateScheduleInput {
     beginTimestamp: DateTime
-    reservationId: String
-    createdByUserId: String
+    reservationId: ID
+    createdByUserId: ID
   }
 
   type Mutation {
     createSchedule(input: CreateScheduleInput!): Schedule! @requireAuth
-    updateSchedule(id: String!, input: UpdateScheduleInput!): Schedule!
+    updateSchedule(id: ID!, input: UpdateScheduleInput!): Schedule!
       @requireAuth
-    deleteSchedule(id: String!): Schedule! @requireAuth
+    deleteSchedule(id: ID!): Schedule! @requireAuth
 
     # BEGIN manual
     createScheduleWithoutReservation(

@@ -1,38 +1,38 @@
 export const schema = gql`
   type Confirmation {
-    id: String!
+    id: ID!
     player: User!
-    playerId: String!
+    playerId: ID!
     status: String
     schedule: Schedule!
-    scheduleId: String!
+    scheduleId: ID!
   }
 
   type Query {
     confirmations: [Confirmation!]! @requireAuth
-    confirmation(id: String!): Confirmation @requireAuth
+    confirmation(id: ID!): Confirmation @requireAuth
   }
 
   input CreateConfirmationInput {
-    playerId: String!
+    playerId: ID!
     status: String
-    scheduleId: String!
+    scheduleId: ID!
   }
 
   input UpdateConfirmationInput {
-    playerId: String
+    playerId: ID
     status: String
-    scheduleId: String
+    scheduleId: ID
   }
 
   type Mutation {
     createConfirmation(input: CreateConfirmationInput!): Confirmation!
       @requireAuth
     updateConfirmation(
-      id: String!
+      id: ID!
       input: UpdateConfirmationInput!
     ): Confirmation! @requireAuth
-    deleteConfirmation(id: String!): Confirmation! @requireAuth
+    deleteConfirmation(id: ID!): Confirmation! @requireAuth
 
     # BEGIN custom
     confirmWithEmail(
