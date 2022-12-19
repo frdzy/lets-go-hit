@@ -14,6 +14,7 @@ TODOs:
 - [x] Frontend to show currently open schedules
 - [x] Add dbAuth
 - [ ] Switch to postgresql since that looks like the cheapest time and money cost option for production
+- [ ] Deploy to [Render](https://render.com/docs/deploy-redwood)
 - [ ] Recreate necessary frontend forms to properly
 
 Later:
