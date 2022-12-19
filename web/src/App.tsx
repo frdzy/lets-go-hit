@@ -1,3 +1,5 @@
+import { AuthProvider } from '@redwoodjs/auth'
+import WebAuthnClient from '@redwoodjs/auth/webAuthn'
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web';
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo';
 
@@ -9,9 +11,11 @@ import './index.css';
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
-      <RedwoodApolloProvider>
-        <Routes />
-      </RedwoodApolloProvider>
+      <AuthProvider type="dbAuth" client={WebAuthnClient}>
+        <RedwoodApolloProvider>
+          <Routes />
+        </RedwoodApolloProvider>
+      </AuthProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>
 );

@@ -15,11 +15,27 @@ model User {
   id                  String  @id @default(uuid())
   email               String  @unique
   name                String?
+  hashedPassword      String  @default("")
+  salt                String  @default("")
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+  webAuthnChallenge   String? @unique
+  credentials         UserCredential[]
   courtLocationsAdded CourtLocation[]
   reservations        Reservation[]
   createdSchedules    Schedule[]
   confirmations       Confirmation[]
 }
+
+model UserCredential {
+  id         String  @id
+  userId     String
+  user       User    @relation(fields: [userId], references: [id])
+  publicKey  Bytes
+  transports String?
+  counter    BigInt
+}
+
 
 model CourtLocation {
   id              String  @id @default(uuid())

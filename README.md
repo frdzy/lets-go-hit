@@ -10,5 +10,11 @@ TODOs:
 - [x] GraphQL backend to create confirmation
 - [x] GraphQL backend to create reservation
 - [x] GraphQL backend to create schedule without reservation
-- [x] [RedwoodJS](https://redwoodjs.com)
-- [ ] Frontend to show currently open schedules
+- [x] Use [RedwoodJS](https://redwoodjs.com)
+- [x] Frontend to show currently open schedules
+- [x] Add dbAuth
+- [ ] Switch to postgresql since that looks like the cheapest time and money cost option for production
+- [ ] Recreate necessary frontend forms to properly
+
+Later:
+- [ ] Switch auth with [Clerk](https://clerk.dev/tutorials/redwoodjs-blog-tutorial-with-clerk)
