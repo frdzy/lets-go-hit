@@ -16,12 +16,6 @@ export const user: QueryResolvers["user"] = ({ id }) => {
   });
 };
 
-export const createUser: MutationResolvers["createUser"] = ({ input }) => {
-  return db.user.create({
-    data: input,
-  });
-};
-
 export const updateUser: MutationResolvers["updateUser"] = ({ id, input }) => {
   return db.user.update({
     data: input,
