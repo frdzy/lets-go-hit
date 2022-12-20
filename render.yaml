@@ -41,8 +41,3 @@ services:
     fromDatabase:
       name: lets-go-play-tennis-db
       property: connectionString
-
-databases:
-  - name: lets-go-play-tennis-db
-    region: oregon
-
