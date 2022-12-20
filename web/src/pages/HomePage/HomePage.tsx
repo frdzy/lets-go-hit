@@ -1,5 +1,5 @@
-import { MetaTags } from "@redwoodjs/web";
-import PlayersCell from "src/components/PlayersCell";
+import { MetaTags } from '@redwoodjs/web';
+import PlayersCell from 'src/components/PlayersCell';
 
 const HomePage = () => {
   return (

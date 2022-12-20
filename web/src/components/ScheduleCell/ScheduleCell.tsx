@@ -1,10 +1,10 @@
 import type {
   FindScheduleQuery,
   FindScheduleQueryVariables,
-} from "types/graphql";
-import type { CellSuccessProps, CellFailureProps } from "@redwoodjs/web";
-import { DateLabel } from "src/components/date";
-import ReservationCell from "src/components/ReservationCell";
+} from 'types/graphql';
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
+import { DateLabel } from 'src/components/date';
+import ReservationCell from 'src/components/ReservationCell';
 
 export const QUERY = gql`
   query FindScheduleQuery($id: ID!) {
@@ -35,7 +35,7 @@ export const Empty = () => <div>Empty</div>;
 export const Failure = ({
   error,
 }: CellFailureProps<FindScheduleQueryVariables>) => (
-  <div style={{ color: "red" }}>Error: {error?.message}</div>
+  <div style={{ color: 'red' }}>Error: {error?.message}</div>
 );
 
 interface Props
@@ -48,8 +48,8 @@ export const Success = ({ schedule, children }: Props) => {
     <article key={schedule.id}>
       <header>
         <h2>
-          <DateLabel isoTimestamp={schedule.beginTimestamp} /> with{" "}
-          {schedule.createdByUser.name ?? "Unknown Player"}
+          <DateLabel isoTimestamp={schedule.beginTimestamp} /> with{' '}
+          {schedule.createdByUser.name ?? 'Unknown Player'}
         </h2>
       </header>
       {schedule.reservation ? (

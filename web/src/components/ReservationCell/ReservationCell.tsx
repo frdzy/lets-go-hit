@@ -1,9 +1,9 @@
 import type {
   FindReservationQuery,
   FindReservationQueryVariables,
-} from "types/graphql";
-import type { CellSuccessProps, CellFailureProps } from "@redwoodjs/web";
-import { DateLabel } from "src/components/date";
+} from 'types/graphql';
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
+import { DateLabel } from 'src/components/date';
 
 export const QUERY = gql`
   query FindReservationQuery($id: ID!) {
@@ -26,7 +26,7 @@ export const Empty = () => <div>Empty</div>;
 export const Failure = ({
   error,
 }: CellFailureProps<FindReservationQueryVariables>) => (
-  <div style={{ color: "red" }}>Error: {error?.message}</div>
+  <div style={{ color: 'red' }}>Error: {error?.message}</div>
 );
 
 export const Success = ({

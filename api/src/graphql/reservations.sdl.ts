@@ -31,10 +31,8 @@ export const schema = gql`
 
   type Mutation {
     createReservation(input: CreateReservationInput!): Reservation! @requireAuth
-    updateReservation(
-      id: ID!
-      input: UpdateReservationInput!
-    ): Reservation! @requireAuth
+    updateReservation(id: ID!, input: UpdateReservationInput!): Reservation!
+      @requireAuth
     deleteReservation(id: ID!): Reservation! @requireAuth
   }
 `;

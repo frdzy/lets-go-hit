@@ -28,8 +28,7 @@ export const schema = gql`
 
   type Mutation {
     createSchedule(input: CreateScheduleInput!): Schedule! @requireAuth
-    updateSchedule(id: ID!, input: UpdateScheduleInput!): Schedule!
-      @requireAuth
+    updateSchedule(id: ID!, input: UpdateScheduleInput!): Schedule! @requireAuth
     deleteSchedule(id: ID!): Schedule! @requireAuth
 
     # BEGIN manual

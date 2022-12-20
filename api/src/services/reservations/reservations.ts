@@ -2,21 +2,21 @@ import type {
   QueryResolvers,
   MutationResolvers,
   ReservationRelationResolvers,
-} from "types/graphql";
+} from 'types/graphql';
 
-import { db } from "src/lib/db";
+import { db } from 'src/lib/db';
 
-export const reservations: QueryResolvers["reservations"] = () => {
+export const reservations: QueryResolvers['reservations'] = () => {
   return db.reservation.findMany();
 };
 
-export const reservation: QueryResolvers["reservation"] = ({ id }) => {
+export const reservation: QueryResolvers['reservation'] = ({ id }) => {
   return db.reservation.findUnique({
     where: { id },
   });
 };
 
-export const createReservation: MutationResolvers["createReservation"] =
+export const createReservation: MutationResolvers['createReservation'] =
   async ({ input }) => {
     const reservation = await db.reservation.create({
       data: input,
@@ -32,13 +32,13 @@ export const createReservation: MutationResolvers["createReservation"] =
       data: {
         scheduleId: schedule.id,
         playerId: input.byUserId,
-        status: "confirmed",
+        status: 'confirmed',
       },
     });
     return reservation;
   };
 
-export const updateReservation: MutationResolvers["updateReservation"] = ({
+export const updateReservation: MutationResolvers['updateReservation'] = ({
   id,
   input,
 }) => {
@@ -48,7 +48,7 @@ export const updateReservation: MutationResolvers["updateReservation"] = ({
   });
 };
 
-export const deleteReservation: MutationResolvers["deleteReservation"] = ({
+export const deleteReservation: MutationResolvers['deleteReservation'] = ({
   id,
 }) => {
   return db.reservation.delete({

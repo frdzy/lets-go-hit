@@ -2,21 +2,21 @@ import type {
   QueryResolvers,
   MutationResolvers,
   ConfirmationRelationResolvers,
-} from "types/graphql";
+} from 'types/graphql';
 
-import { db } from "src/lib/db";
+import { db } from 'src/lib/db';
 
-export const confirmations: QueryResolvers["confirmations"] = () => {
+export const confirmations: QueryResolvers['confirmations'] = () => {
   return db.confirmation.findMany();
 };
 
-export const confirmation: QueryResolvers["confirmation"] = ({ id }) => {
+export const confirmation: QueryResolvers['confirmation'] = ({ id }) => {
   return db.confirmation.findUnique({
     where: { id },
   });
 };
 
-export const createConfirmation: MutationResolvers["createConfirmation"] = ({
+export const createConfirmation: MutationResolvers['createConfirmation'] = ({
   input,
 }) => {
   return db.confirmation.create({
@@ -24,7 +24,7 @@ export const createConfirmation: MutationResolvers["createConfirmation"] = ({
   });
 };
 
-export const updateConfirmation: MutationResolvers["updateConfirmation"] = ({
+export const updateConfirmation: MutationResolvers['updateConfirmation'] = ({
   id,
   input,
 }) => {
@@ -34,7 +34,7 @@ export const updateConfirmation: MutationResolvers["updateConfirmation"] = ({
   });
 };
 
-export const deleteConfirmation: MutationResolvers["deleteConfirmation"] = ({
+export const deleteConfirmation: MutationResolvers['deleteConfirmation'] = ({
   id,
 }) => {
   return db.confirmation.delete({
@@ -42,8 +42,10 @@ export const deleteConfirmation: MutationResolvers["deleteConfirmation"] = ({
   });
 };
 
-export const confirmWithEmail: MutationResolvers["confirmWithEmail"] =
-  async (args: {input: { scheduleId: string; name: string; email: string }}) => {
+export const confirmWithEmail: MutationResolvers['confirmWithEmail'] =
+  async (args: {
+    input: { scheduleId: string; name: string; email: string };
+  }) => {
     const { scheduleId, name, email } = args.input;
     let user = await db.user.findFirst({
       where: { email },
@@ -60,7 +62,7 @@ export const confirmWithEmail: MutationResolvers["confirmWithEmail"] =
       data: {
         scheduleId,
         playerId: user.id,
-        status: "confirmed",
+        status: 'confirmed',
       },
       include: {
         player: true,

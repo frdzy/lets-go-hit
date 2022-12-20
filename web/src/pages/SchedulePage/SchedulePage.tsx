@@ -5,11 +5,11 @@ import {
   Submit,
   TextField,
   useForm,
-} from "@redwoodjs/forms";
-import { MetaTags, useMutation } from "@redwoodjs/web";
-import { toast, Toaster } from "@redwoodjs/web/toast";
-import ScheduleCell from "src/components/ScheduleCell";
-import { SignUpMutation, SignUpMutationVariables } from "types/graphql";
+} from '@redwoodjs/forms';
+import { MetaTags, useMutation } from '@redwoodjs/web';
+import { toast, Toaster } from '@redwoodjs/web/toast';
+import ScheduleCell from 'src/components/ScheduleCell';
+import { SignUpMutation, SignUpMutationVariables } from 'types/graphql';
 
 const SIGN_UP = gql`
   mutation SignUpMutation($input: ConfirmWithEmailInput!) {
@@ -37,7 +37,7 @@ const SchedulePage = ({ id }) => {
   >(SIGN_UP, {
     onCompleted: () => {
       formMethods.reset();
-      toast.success("Signed up");
+      toast.success('Signed up');
     },
   });
 
@@ -70,7 +70,7 @@ const SchedulePage = ({ id }) => {
               required: true,
               pattern: {
                 value: /^[^@]+@[^.]+\..+$/,
-                message: "Please enter a valid email address",
+                message: 'Please enter a valid email address',
               },
             }}
             errorClassName="error"

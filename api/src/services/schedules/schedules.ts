@@ -2,21 +2,21 @@ import type {
   QueryResolvers,
   MutationResolvers,
   ScheduleRelationResolvers,
-} from "types/graphql";
+} from 'types/graphql';
 
-import { db } from "src/lib/db";
+import { db } from 'src/lib/db';
 
-export const schedules: QueryResolvers["schedules"] = () => {
+export const schedules: QueryResolvers['schedules'] = () => {
   return db.schedule.findMany();
 };
 
-export const schedule: QueryResolvers["schedule"] = ({ id }) => {
+export const schedule: QueryResolvers['schedule'] = ({ id }) => {
   return db.schedule.findUnique({
     where: { id },
   });
 };
 
-export const createSchedule: MutationResolvers["createSchedule"] = ({
+export const createSchedule: MutationResolvers['createSchedule'] = ({
   input,
 }) => {
   return db.schedule.create({
@@ -24,7 +24,7 @@ export const createSchedule: MutationResolvers["createSchedule"] = ({
   });
 };
 
-export const updateSchedule: MutationResolvers["updateSchedule"] = ({
+export const updateSchedule: MutationResolvers['updateSchedule'] = ({
   id,
   input,
 }) => {
@@ -34,7 +34,7 @@ export const updateSchedule: MutationResolvers["updateSchedule"] = ({
   });
 };
 
-export const deleteSchedule: MutationResolvers["deleteSchedule"] = ({ id }) => {
+export const deleteSchedule: MutationResolvers['deleteSchedule'] = ({ id }) => {
   return db.schedule.delete({
     where: { id },
   });
@@ -53,7 +53,7 @@ export const Schedule: ScheduleRelationResolvers = {
   beginTimestamp: (_obj, { root }) => root.beginTimestamp.toISOString(),
 };
 
-export const createScheduleWithoutReservation: MutationResolvers["createScheduleWithoutReservation"] =
+export const createScheduleWithoutReservation: MutationResolvers['createScheduleWithoutReservation'] =
   async (args: { beginTimestamp: string; createdByUserId: string }) => {
     const schedule = await db.schedule.create({
       data: args,
@@ -62,7 +62,7 @@ export const createScheduleWithoutReservation: MutationResolvers["createSchedule
       data: {
         scheduleId: schedule.id,
         playerId: args.createdByUserId,
-        status: "confirmed",
+        status: 'confirmed',
       },
     });
     return schedule;

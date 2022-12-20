@@ -18,4 +18,5 @@ TODOs:
 - [ ] Recreate necessary frontend forms to properly
 
 Later:
+
 - [ ] Switch auth with [Clerk](https://clerk.dev/tutorials/redwoodjs-blog-tutorial-with-clerk)

@@ -1,6 +1,6 @@
-import { MetaTags } from "@redwoodjs/web";
+import { MetaTags } from '@redwoodjs/web';
 
-import OpenSchedulesCell from "src/components/OpenSchedulesCell";
+import OpenSchedulesCell from 'src/components/OpenSchedulesCell';
 
 const SchedulesPage = () => {
   return (

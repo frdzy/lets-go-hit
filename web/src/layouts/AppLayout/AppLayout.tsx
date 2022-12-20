@@ -1,5 +1,5 @@
-import { useAuth } from "@redwoodjs/auth";
-import { Link, routes } from "@redwoodjs/router";
+import { useAuth } from '@redwoodjs/auth';
+import { Link, routes } from '@redwoodjs/router';
 
 type AppLayoutProps = {
   children?: React.ReactNode;
@@ -14,7 +14,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           <h1>Let's Go Play Tennis</h1>
           {isAuthenticated ? (
             <div>
-              <span>Logged in as {currentUser.email}</span>{" "}
+              <span>Logged in as {currentUser.email}</span>{' '}
               <button type="button" onClick={logOut}>
                 Logout
               </button>

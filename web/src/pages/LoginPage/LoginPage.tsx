@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react'
-import { useEffect } from 'react'
+import { useRef, useState } from 'react';
+import { useEffect } from 'react';
 
-import { useAuth } from '@redwoodjs/auth'
+import { useAuth } from '@redwoodjs/auth';
 import {
   Form,
   Label,
@@ -9,13 +9,13 @@ import {
   PasswordField,
   Submit,
   FieldError,
-} from '@redwoodjs/forms'
-import { Link, navigate, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
+} from '@redwoodjs/forms';
+import { Link, navigate, routes } from '@redwoodjs/router';
+import { MetaTags } from '@redwoodjs/web';
+import { toast, Toaster } from '@redwoodjs/web/toast';
 
-const WELCOME_MESSAGE = 'Welcome back!'
-const REDIRECT = routes.home()
+const WELCOME_MESSAGE = 'Welcome back!';
+const REDIRECT = routes.home();
 
 const LoginPage = ({ type }) => {
   const {
@@ -24,88 +24,88 @@ const LoginPage = ({ type }) => {
     loading,
     logIn,
     reauthenticate,
-  } = useAuth()
-  const [shouldShowWebAuthn, setShouldShowWebAuthn] = useState(false)
+  } = useAuth();
+  const [shouldShowWebAuthn, setShouldShowWebAuthn] = useState(false);
   const [showWebAuthn, setShowWebAuthn] = useState(
     webAuthn.isEnabled() && type !== 'password'
-  )
+  );
 
   // should redirect right after login or wait to show the webAuthn prompts?
   useEffect(() => {
     if (isAuthenticated && (!shouldShowWebAuthn || webAuthn.isEnabled())) {
-      navigate(REDIRECT)
+      navigate(REDIRECT);
     }
-  }, [isAuthenticated, shouldShowWebAuthn])
+  }, [isAuthenticated, shouldShowWebAuthn]);
 
   // if WebAuthn is enabled, show the prompt as soon as the page loads
   useEffect(() => {
     if (!loading && !isAuthenticated && showWebAuthn) {
-      onAuthenticate()
+      onAuthenticate();
     }
-  }, [loading, isAuthenticated])
+  }, [loading, isAuthenticated]);
 
   // focus on the username field as soon as the page loads
-  const usernameRef = useRef()
+  const usernameRef = useRef();
   useEffect(() => {
-    usernameRef.current && usernameRef.current.focus()
-  }, [])
+    usernameRef.current && usernameRef.current.focus();
+  }, []);
 
   const onSubmit = async (data) => {
-    const webAuthnSupported = await webAuthn.isSupported()
+    const webAuthnSupported = await webAuthn.isSupported();
 
     if (webAuthnSupported) {
-      setShouldShowWebAuthn(true)
+      setShouldShowWebAuthn(true);
     }
-    const response = await logIn({ ...data })
+    const response = await logIn({ ...data });
 
     if (response.message) {
       // auth details good, but user not logged in
-      toast(response.message)
+      toast(response.message);
     } else if (response.error) {
       // error while authenticating
-      toast.error(response.error)
+      toast.error(response.error);
     } else {
       // user logged in
       if (webAuthnSupported) {
-        setShowWebAuthn(true)
+        setShowWebAuthn(true);
       } else {
-        toast.success(WELCOME_MESSAGE)
+        toast.success(WELCOME_MESSAGE);
       }
     }
-  }
+  };
 
   const onAuthenticate = async () => {
     try {
-      await webAuthn.authenticate()
-      await reauthenticate()
-      toast.success(WELCOME_MESSAGE)
-      navigate(REDIRECT)
+      await webAuthn.authenticate();
+      await reauthenticate();
+      toast.success(WELCOME_MESSAGE);
+      navigate(REDIRECT);
     } catch (e) {
       if (e.name === 'WebAuthnDeviceNotFoundError') {
         toast.error(
           'Device not found, log in with username/password to continue'
-        )
-        setShowWebAuthn(false)
+        );
+        setShowWebAuthn(false);
       } else {
-        toast.error(e.message)
+        toast.error(e.message);
       }
     }
-  }
+  };
 
   const onRegister = async () => {
     try {
-      await webAuthn.register()
-      toast.success(WELCOME_MESSAGE)
-      navigate(REDIRECT)
+      await webAuthn.register();
+      toast.success(WELCOME_MESSAGE);
+      navigate(REDIRECT);
     } catch (e) {
-      toast.error(e.message)
+      toast.error(e.message);
     }
-  }
+  };
 
   const onSkip = () => {
-    toast.success(WELCOME_MESSAGE)
-    setShouldShowWebAuthn(false)
-  }
+    toast.success(WELCOME_MESSAGE);
+    setShouldShowWebAuthn(false);
+  };
 
   const AuthWebAuthnPrompt = () => {
     return (
@@ -118,8 +118,8 @@ const LoginPage = ({ type }) => {
           </button>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const RegisterWebAuthnPrompt = () => (
     <div className="rw-webauthn-wrapper">
@@ -137,7 +137,7 @@ const LoginPage = ({ type }) => {
         </button>
       </div>
     </div>
-  )
+  );
 
   const PasswordForm = () => (
     <Form onSubmit={onSubmit} className="rw-form-wrapper">
@@ -196,19 +196,19 @@ const LoginPage = ({ type }) => {
         <Submit className="rw-button rw-button-blue">Login</Submit>
       </div>
     </Form>
-  )
+  );
 
   const formToRender = () => {
     if (showWebAuthn) {
       if (webAuthn.isEnabled()) {
-        return <AuthWebAuthnPrompt />
+        return <AuthWebAuthnPrompt />;
       } else {
-        return <RegisterWebAuthnPrompt />
+        return <RegisterWebAuthnPrompt />;
       }
     } else {
-      return <PasswordForm />
+      return <PasswordForm />;
     }
-  }
+  };
 
   const linkToRender = () => {
     if (showWebAuthn) {
@@ -220,7 +220,7 @@ const LoginPage = ({ type }) => {
               username and password
             </a>
           </div>
-        )
+        );
       }
     } else {
       return (
@@ -230,12 +230,12 @@ const LoginPage = ({ type }) => {
             Sign up!
           </Link>
         </div>
-      )
+      );
     }
-  }
+  };
 
   if (loading) {
-    return null
+    return null;
   }
 
   return (
@@ -258,7 +258,7 @@ const LoginPage = ({ type }) => {
         </div>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

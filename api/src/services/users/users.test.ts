@@ -1,7 +1,7 @@
-import type { User } from "@prisma/client";
+import type { User } from '@prisma/client';
 
-import { users, user, updateUser, deleteUser } from "./users";
-import type { StandardScenario } from "./users.scenarios";
+import { users, user, updateUser, deleteUser } from './users';
+import type { StandardScenario } from './users.scenarios';
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float.
@@ -9,30 +9,30 @@ import type { StandardScenario } from "./users.scenarios";
 //       https://redwoodjs.com/docs/testing#testing-services
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
-describe("users", () => {
-  scenario("returns all users", async (scenario: StandardScenario) => {
+describe('users', () => {
+  scenario('returns all users', async (scenario: StandardScenario) => {
     const result = await users();
 
     expect(result.length).toEqual(Object.keys(scenario.user).length);
   });
 
-  scenario("returns a single user", async (scenario: StandardScenario) => {
+  scenario('returns a single user', async (scenario: StandardScenario) => {
     const result = await user({ id: scenario.user.one.id });
 
     expect(result).toEqual(scenario.user.one);
   });
 
-  scenario("updates a user", async (scenario: StandardScenario) => {
+  scenario('updates a user', async (scenario: StandardScenario) => {
     const original = (await user({ id: scenario.user.one.id })) as User;
     const result = await updateUser({
       id: original.id,
-      input: { email: "String40389422" },
+      input: { email: 'String40389422' },
     });
 
-    expect(result.email).toEqual("String40389422");
+    expect(result.email).toEqual('String40389422');
   });
 
-  scenario("deletes a user", async (scenario: StandardScenario) => {
+  scenario('deletes a user', async (scenario: StandardScenario) => {
     const original = (await deleteUser({ id: scenario.user.one.id })) as User;
     const result = await user({ id: original.id });
 

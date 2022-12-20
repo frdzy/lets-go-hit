@@ -1,7 +1,7 @@
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
-import { useAuth } from "@redwoodjs/auth";
+import { useAuth } from '@redwoodjs/auth';
 import {
   Form,
   Label,
@@ -9,10 +9,10 @@ import {
   PasswordField,
   FieldError,
   Submit,
-} from "@redwoodjs/forms";
-import { Link, navigate, routes } from "@redwoodjs/router";
-import { MetaTags } from "@redwoodjs/web";
-import { toast, Toaster } from "@redwoodjs/web/toast";
+} from '@redwoodjs/forms';
+import { Link, navigate, routes } from '@redwoodjs/router';
+import { MetaTags } from '@redwoodjs/web';
+import { toast, Toaster } from '@redwoodjs/web/toast';
 
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth();
@@ -38,7 +38,7 @@ const SignupPage = () => {
       toast.error(response.error);
     } else {
       // user is signed in automatically
-      toast.success("Welcome!");
+      toast.success('Welcome!');
     }
   };
 
@@ -47,7 +47,7 @@ const SignupPage = () => {
       <MetaTags title="Signup" />
 
       <main className="rw-main">
-        <Toaster toastOptions={{ className: "rw-toast", duration: 6000 }} />
+        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
@@ -72,7 +72,7 @@ const SignupPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: "Email is required",
+                        message: 'Email is required',
                       },
                     }}
                   />
@@ -93,7 +93,7 @@ const SignupPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: "Password is required",
+                        message: 'Password is required',
                       },
                     }}
                   />
@@ -109,7 +109,7 @@ const SignupPage = () => {
             </div>
           </div>
           <div className="rw-login-link">
-            <span>Already have an account?</span>{" "}
+            <span>Already have an account?</span>{' '}
             <Link to={routes.login()} className="rw-link">
               Log in!
             </Link>

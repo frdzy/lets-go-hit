@@ -1,4 +1,4 @@
-import { db } from "api/src/lib/db";
+import { db } from 'api/src/lib/db';
 
 export default async () => {
   console.log(
@@ -10,20 +10,20 @@ export default async () => {
   try {
     const alice = await db.user.create({
       data: {
-        name: "Alice",
-        email: "alice@db.io",
+        name: 'Alice',
+        email: 'alice@db.io',
       },
     });
     const bob = await db.user.create({
       data: {
-        name: "Bob",
-        email: "bob@db.io",
+        name: 'Bob',
+        email: 'bob@db.io',
       },
     });
 
     const court = await db.courtLocation.create({
       data: {
-        name: "Golden Gate Park",
+        name: 'Golden Gate Park',
         addedById: alice.id,
       },
     });
@@ -48,7 +48,7 @@ export default async () => {
     const confirmationAlice = await db.confirmation.create({
       data: {
         playerId: alice.id,
-        status: "confirmed",
+        status: 'confirmed',
         scheduleId: schedule.id,
       },
     });
@@ -56,17 +56,17 @@ export default async () => {
     const confirmationBob = await db.confirmation.create({
       data: {
         playerId: bob.id,
-        status: "confirmed",
+        status: 'confirmed',
         scheduleId: schedule.id,
       },
     });
 
-    console.log("alice", alice);
-    console.log("court", court);
-    console.log("reservation", reservation);
-    console.log("schedule", schedule);
-    console.log("confirmationAlice", confirmationAlice);
-    console.log("confirmationBob", confirmationBob);
+    console.log('alice', alice);
+    console.log('court', court);
+    console.log('reservation', reservation);
+    console.log('schedule', schedule);
+    console.log('confirmationAlice', confirmationAlice);
+    console.log('confirmationBob', confirmationBob);
 
     // If using dbAuth and seeding users, you'll need to add a `hashedPassword`
     // and associated `salt` to their record. Here's how to create them using
@@ -91,7 +91,7 @@ export default async () => {
     //     })
     //   }
   } catch (error) {
-    console.warn("Please define your seed data.");
+    console.warn('Please define your seed data.');
     console.error(error);
   }
 };

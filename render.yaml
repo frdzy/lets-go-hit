@@ -5,35 +5,35 @@
 #####
 
 services:
-- name: lets-go-play-tennis-web
-  type: web
-  env: static
-  buildCommand: yarn install && yarn rw deploy render web
-  staticPublishPath: ./web/dist
-  envVars:
-  - key: NODE_VERSION
-    value: 16
-  - key: SKIP_INSTALL_DEPS
-    value: true
-  routes:
-  - type: rewrite
-    source: /.redwood/functions/*
-#####
-# NOTE: replace destination api url after first deploy to Render
-# example:
-#   destination: https://myredwoodproject-api.onrender.com/*
-#####
-    destination: https://lets-go-play-tennis-api.onrender.com/*
-  - type: rewrite
-    source: /*
-    destination: /index.html
+  - name: lets-go-play-tennis-web
+    type: web
+    env: static
+    buildCommand: yarn install && yarn rw deploy render web
+    staticPublishPath: ./web/dist
+    envVars:
+      - key: NODE_VERSION
+        value: 16
+      - key: SKIP_INSTALL_DEPS
+        value: true
+    routes:
+      - type: rewrite
+        source: /.redwood/functions/*
+        #####
+        # NOTE: replace destination api url after first deploy to Render
+        # example:
+        #   destination: https://myredwoodproject-api.onrender.com/*
+        #####
+        destination: https://lets-go-play-tennis-api.onrender.com/*
+      - type: rewrite
+        source: /*
+        destination: /index.html
 
-- name: lets-go-play-tennis-api
-  type: web
-  env: node
-  region: oregon
-  buildCommand: yarn && yarn rw build api
-  startCommand: yarn rw deploy render api
-  envVars:
-  - key: NODE_VERSION
-    value: 16
+  - name: lets-go-play-tennis-api
+    type: web
+    env: node
+    region: oregon
+    buildCommand: yarn && yarn rw build api
+    startCommand: yarn rw deploy render api
+    envVars:
+      - key: NODE_VERSION
+        value: 16

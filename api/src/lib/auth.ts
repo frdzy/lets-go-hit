@@ -1,7 +1,7 @@
-import type { Decoded } from "@redwoodjs/api";
-import { AuthenticationError, ForbiddenError } from "@redwoodjs/graphql-server";
+import type { Decoded } from '@redwoodjs/api';
+import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server';
 
-import { db } from "./db";
+import { db } from './db';
 
 /**
  * The session object sent in as the first argument to getCurrentUser() will
@@ -21,7 +21,7 @@ import { db } from "./db";
  * seen if someone were to open the Web Inspector in their browser.
  */
 export const getCurrentUser = async (session: Decoded) => {
-  if (!session || typeof session.id !== "string") {
+  if (!session || typeof session.id !== 'string') {
     return null;
   }
 
@@ -61,8 +61,8 @@ export const hasRole = (roles: AllowedRoles): boolean => {
 
   const currentUserRoles = context.currentUser?.roles;
 
-  if (typeof roles === "string") {
-    if (typeof currentUserRoles === "string") {
+  if (typeof roles === 'string') {
+    if (typeof currentUserRoles === 'string') {
       // roles to check is a string, currentUser.roles is a string
       return currentUserRoles === roles;
     } else if (Array.isArray(currentUserRoles)) {
@@ -77,7 +77,7 @@ export const hasRole = (roles: AllowedRoles): boolean => {
       return currentUserRoles?.some((allowedRole) =>
         roles.includes(allowedRole)
       );
-    } else if (typeof currentUserRoles === "string") {
+    } else if (typeof currentUserRoles === 'string') {
       // roles to check is an array, currentUser.roles is a string
       return roles.some((allowedRole) => currentUserRoles === allowedRole);
     }
