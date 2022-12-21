@@ -31,6 +31,9 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <li>
               <Link to={routes.schedules()}>Schedules</Link>
             </li>
+            <li>
+              <Link to={routes.courtLocations()}>Courts</Link>
+            </li>
           </ul>
         </nav>
       </header>

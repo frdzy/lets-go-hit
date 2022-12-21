@@ -1,16 +1,17 @@
 export const schema = gql`
   type CourtLocation {
-    id: ID!
+    id: String!
     name: String!
     address: String
     notes: String
     addedBy: User
-    addedById: ID
+    addedById: String
+    reservations: [Reservation]!
   }
 
   type Query {
     courtLocations: [CourtLocation!]! @requireAuth
-    courtLocation(id: ID!): CourtLocation @requireAuth
+    courtLocation(id: String!): CourtLocation @requireAuth
   }
 
   input CreateCourtLocationInput {
@@ -29,9 +30,9 @@ export const schema = gql`
     createCourtLocation(input: CreateCourtLocationInput!): CourtLocation!
       @requireAuth
     updateCourtLocation(
-      id: ID!
+      id: String!
       input: UpdateCourtLocationInput!
     ): CourtLocation! @requireAuth
-    deleteCourtLocation(id: ID!): CourtLocation! @requireAuth
+    deleteCourtLocation(id: String!): CourtLocation! @requireAuth
   }
 `;
