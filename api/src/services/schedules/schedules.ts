@@ -5,6 +5,7 @@ import type {
 } from 'types/graphql';
 
 import { db } from 'src/lib/db';
+import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
 export const schedules: QueryResolvers['schedules'] = () => {
   return db.schedule.findMany();
@@ -19,8 +20,10 @@ export const schedule: QueryResolvers['schedule'] = ({ id }) => {
 export const createSchedule: MutationResolvers['createSchedule'] = ({
   input,
 }) => {
+  const currentUser = getRequiredCurrentUser();
+  const createdByUserId = currentUser.id;
   return db.schedule.create({
-    data: input,
+    data: { ...input, createdByUserId },
   });
 };
 
@@ -52,18 +55,3 @@ export const Schedule: ScheduleRelationResolvers = {
   },
   beginTimestamp: (_obj, { root }) => root.beginTimestamp.toISOString(),
 };
-
-export const createScheduleWithoutReservation: MutationResolvers['createScheduleWithoutReservation'] =
-  async (args: { beginTimestamp: string; createdByUserId: string }) => {
-    const schedule = await db.schedule.create({
-      data: args,
-    });
-    await db.confirmation.create({
-      data: {
-        scheduleId: schedule.id,
-        playerId: args.createdByUserId,
-        status: 'confirmed',
-      },
-    });
-    return schedule;
-  };

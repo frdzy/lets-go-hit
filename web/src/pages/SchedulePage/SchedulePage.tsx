@@ -12,8 +12,8 @@ import ScheduleCell from 'src/components/ScheduleCell';
 import { SignUpMutation, SignUpMutationVariables } from 'types/graphql';
 
 const SIGN_UP = gql`
-  mutation SignUpMutation($input: ConfirmWithEmailInput!) {
-    confirmWithEmail(input: $input) {
+  mutation CreateConfirmationMutation($input: CreateConfirmationInput!) {
+    createConfirmation(input: $input) {
       id
       schedule {
         id
@@ -41,8 +41,8 @@ const SchedulePage = ({ id }) => {
     },
   });
 
-  const handleSubmit = (data: { email: string; name: string }) => {
-    signUp({ variables: { input: { scheduleId: id, ...data } } });
+  const handleSubmit = () => {
+    signUp({ variables: { input: { scheduleId: id } } });
   };
 
   return (
@@ -52,30 +52,6 @@ const SchedulePage = ({ id }) => {
       <Toaster />
       <ScheduleCell id={id}>
         <Form onSubmit={handleSubmit} formMethods={formMethods}>
-          <Label name="name" errorClassName="error">
-            Name
-          </Label>
-          <TextField
-            name="name"
-            validation={{ required: true }}
-            errorClassName="error"
-          />
-          <FieldError className="error" name="name" />
-          <Label name="email" errorClassName="error">
-            Email
-          </Label>
-          <TextField
-            name="email"
-            validation={{
-              required: true,
-              pattern: {
-                value: /^[^@]+@[^.]+\..+$/,
-                message: 'Please enter a valid email address',
-              },
-            }}
-            errorClassName="error"
-          />
-          <FieldError className="error" name="email" />
           <Submit disabled={loading}>Submit</Submit>
         </Form>
       </ScheduleCell>

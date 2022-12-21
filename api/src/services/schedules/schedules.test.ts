@@ -29,10 +29,13 @@ describe('schedules', () => {
   });
 
   scenario('creates a schedule', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.schedule.two.createdByUserId,
+      email: scenario.schedule.two.createdByUserId,
+    });
     const result = await createSchedule({
       input: {
         beginTimestamp: '2022-12-04T23:27:17.813Z',
-        createdByUserId: scenario.schedule.two.createdByUserId,
       },
     });
 

@@ -19,14 +19,12 @@ export const schema = gql`
     beginTimestamp: DateTime!
     endTimestamp: DateTime!
     courtLocationId: ID!
-    byUserId: ID!
   }
 
   input UpdateReservationInput {
     beginTimestamp: DateTime
     endTimestamp: DateTime
     courtLocationId: ID
-    byUserId: ID
   }
 
   type Mutation {

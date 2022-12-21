@@ -17,25 +17,16 @@ export const schema = gql`
   input CreateScheduleInput {
     beginTimestamp: DateTime!
     reservationId: ID
-    createdByUserId: ID!
   }
 
   input UpdateScheduleInput {
     beginTimestamp: DateTime
     reservationId: ID
-    createdByUserId: ID
   }
 
   type Mutation {
     createSchedule(input: CreateScheduleInput!): Schedule! @requireAuth
     updateSchedule(id: ID!, input: UpdateScheduleInput!): Schedule! @requireAuth
     deleteSchedule(id: ID!): Schedule! @requireAuth
-
-    # BEGIN manual
-    createScheduleWithoutReservation(
-      beginTimestamp: String!
-      createdByUserId: ID!
-    ): Schedule @skipAuth
-    # END manual
   }
 `;

@@ -15,7 +15,7 @@ TODOs:
 - [x] Add dbAuth
 - [x] Switch to postgresql since that looks like the cheapest time and money cost option for production
 - [x] Deploy to [Render](https://render.com/docs/deploy-redwood)
-- [ ] Recreate necessary frontend forms to properly
+- [ ] Recreate necessary frontend forms to properly utilize authentication
 
 Later:
 

@@ -6,7 +6,6 @@ export const schema = gql`
     notes: String
     addedBy: User
     addedById: ID
-    reservations: [Reservation]!
   }
 
   type Query {
@@ -18,14 +17,12 @@ export const schema = gql`
     name: String!
     address: String
     notes: String
-    addedById: ID
   }
 
   input UpdateCourtLocationInput {
     name: String
     address: String
     notes: String
-    addedById: ID
   }
 
   type Mutation {

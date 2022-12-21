@@ -14,21 +14,12 @@ export const schema = gql`
   }
 
   input CreateConfirmationInput {
-    playerId: ID!
-    status: String
     scheduleId: ID!
   }
 
   input UpdateConfirmationInput {
-    playerId: ID
     status: String
     scheduleId: ID
-  }
-
-  input ConfirmWithEmailInput {
-    scheduleId: ID!
-    name: String!
-    email: String!
   }
 
   type Mutation {
@@ -37,9 +28,5 @@ export const schema = gql`
     updateConfirmation(id: ID!, input: UpdateConfirmationInput!): Confirmation!
       @requireAuth
     deleteConfirmation(id: ID!): Confirmation! @requireAuth
-
-    # BEGIN custom
-    confirmWithEmail(input: ConfirmWithEmailInput!): Confirmation @skipAuth
-    # END custom
   }
 `;

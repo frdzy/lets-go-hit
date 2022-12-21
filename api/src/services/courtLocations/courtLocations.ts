@@ -46,9 +46,4 @@ export const CourtLocation: CourtLocationRelationResolvers = {
   addedBy: (_obj, { root }) => {
     return db.courtLocation.findUnique({ where: { id: root?.id } }).addedBy();
   },
-  reservations: (_obj, { root }) => {
-    return db.courtLocation
-      .findUnique({ where: { id: root?.id } })
-      .reservations();
-  },
 };

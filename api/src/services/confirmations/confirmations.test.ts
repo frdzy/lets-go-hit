@@ -32,9 +32,12 @@ describe('confirmations', () => {
   );
 
   scenario('creates a confirmation', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.confirmation.two.playerId,
+      email: scenario.confirmation.two.playerId,
+    });
     const result = await createConfirmation({
       input: {
-        playerId: scenario.confirmation.two.playerId,
         scheduleId: scenario.confirmation.two.scheduleId,
       },
     });

@@ -32,12 +32,15 @@ describe('reservations', () => {
   );
 
   scenario('creates a reservation', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.reservation.two.byUserId,
+      email: scenario.reservation.two.byUserId,
+    });
     const result = await createReservation({
       input: {
         beginTimestamp: '2022-12-04T23:41:24.663Z',
         endTimestamp: '2022-12-04T23:41:24.663Z',
         courtLocationId: scenario.reservation.two.courtLocationId,
-        byUserId: scenario.reservation.two.byUserId,
       },
     });
 

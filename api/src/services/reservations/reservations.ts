@@ -5,6 +5,7 @@ import type {
 } from 'types/graphql';
 
 import { db } from 'src/lib/db';
+import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
 export const reservations: QueryResolvers['reservations'] = () => {
   return db.reservation.findMany();
@@ -18,20 +19,22 @@ export const reservation: QueryResolvers['reservation'] = ({ id }) => {
 
 export const createReservation: MutationResolvers['createReservation'] =
   async ({ input }) => {
+    const currentUser = getRequiredCurrentUser();
+    const byUserId = currentUser.id;
     const reservation = await db.reservation.create({
-      data: input,
+      data: { ...input, byUserId },
     });
     const schedule = await db.schedule.create({
       data: {
         reservationId: reservation.id,
         beginTimestamp: input.beginTimestamp,
-        createdByUserId: input.byUserId,
+        createdByUserId: byUserId,
       },
     });
     await db.confirmation.create({
       data: {
         scheduleId: schedule.id,
-        playerId: input.byUserId,
+        playerId: byUserId,
         status: 'confirmed',
       },
     });
