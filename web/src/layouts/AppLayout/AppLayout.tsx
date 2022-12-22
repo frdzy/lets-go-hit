@@ -12,7 +12,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       <header>
         <div className="flex-between">
           <h1>Let's Go Play Tennis</h1>
-          {isAuthenticated ? (
+          {isAuthenticated && currentUser ? (
             <div>
               <span>Logged in as {currentUser.email}</span>{' '}
               <button type="button" onClick={logOut}>
