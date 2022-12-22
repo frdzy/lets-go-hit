@@ -9,7 +9,8 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/core": "3.5.0"
+    "@redwoodjs/core": "3.5.0",
+    "prettier-plugin-tailwindcss": "^0.2.1"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
