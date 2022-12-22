@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <>
       <MetaTags title="Home" description="Home page" />
-      Home
+      <h2 className="rw-heading rw-heading-primary my-2">Home</h2>
       <PlayersCell />
     </>
   );

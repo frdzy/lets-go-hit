@@ -9,20 +9,24 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth();
   return (
     <>
-      <header className="rw-header">
-        <h1>Let's Go Play Tennis</h1>
-        {isAuthenticated && currentUser ? (
-          <div>
-            <span>Logged in as {currentUser.email}</span>{' '}
-            <button type="button" onClick={logOut}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <Link to={routes.login()}>Login</Link>
-        )}
+      <header className="md:flex">
+        <h1 className="font-xl my-auto px-4 pt-2 text-xl">
+          Let's Go Play Tennis
+        </h1>
+        <div className="mx-2 my-4 max-w-xs rounded-xl bg-slate-50 p-2">
+          {isAuthenticated && currentUser ? (
+            <>
+              <span>Logged in as {currentUser.email}</span>{' '}
+              <button type="button" onClick={logOut}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link to={routes.login()}>Login</Link>
+          )}
+        </div>
       </header>
-      <nav>
+      <nav className="my-2 px-4">
         <ul>
           <li>
             <Link to={routes.home()}>Home</Link>
@@ -35,7 +39,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           </li>
         </ul>
       </nav>
-      <main>{children}</main>
+      <main className="rw-main my-2 px-2">{children}</main>
     </>
   );
 };
