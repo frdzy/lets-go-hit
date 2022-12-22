@@ -5,14 +5,14 @@ export const standard = defineScenario<Prisma.ScheduleCreateArgs>({
   schedule: {
     one: {
       data: {
-        beginTimestamp: '2022-12-04T23:27:17.828Z',
-        createdByUser: { create: { email: 'String4500804' } },
+        beginTimestamp: '2022-12-22T05:04:51.703Z',
+        createdByUser: { create: { email: 'String414669' } },
       },
     },
     two: {
       data: {
-        beginTimestamp: '2022-12-04T23:27:17.828Z',
-        createdByUser: { create: { email: 'String7680531' } },
+        beginTimestamp: '2022-12-22T05:04:51.703Z',
+        createdByUser: { create: { email: 'String8839569' } },
       },
     },
   },
