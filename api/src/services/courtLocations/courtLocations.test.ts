@@ -31,7 +31,11 @@ describe('courtLocations', () => {
     }
   );
 
-  scenario('creates a courtLocation', async () => {
+  scenario('creates a courtLocation', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.courtLocation.two.addedById,
+      email: scenario.courtLocation.two.addedById,
+    });
     const result = await createCourtLocation({
       input: { name: 'String' },
     });
