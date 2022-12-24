@@ -53,5 +53,4 @@ export const Schedule: ScheduleRelationResolvers = {
   confirmations: (_obj, { root }) => {
     return db.schedule.findUnique({ where: { id: root?.id } }).confirmations();
   },
-  beginTimestamp: (_obj, { root }) => root.beginTimestamp.toISOString(),
 };
