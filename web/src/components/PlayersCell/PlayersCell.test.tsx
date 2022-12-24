@@ -35,7 +35,7 @@ describe('PlayersCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success players={standard().players} />);
+      render(<Success users={standard().users} />);
     }).not.toThrow();
   });
 });

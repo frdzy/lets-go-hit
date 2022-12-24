@@ -20,6 +20,7 @@ export const QUERY = gql`
       }
       confirmations {
         player {
+          id
           name
         }
         status
@@ -60,7 +61,9 @@ export const Success = ({ schedule, children }: Props) => {
       <div>
         <div>Confirmations</div>
         <ul>
-          {schedule.confirmations.map((c) => c && <li>{c.player.name}</li>)}
+          {schedule.confirmations.map(
+            (c) => c && <li key={c.player.id}>{c.player.name}</li>
+          )}
         </ul>
       </div>
       {children}

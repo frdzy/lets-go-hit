@@ -61,7 +61,7 @@ export const timeTag = (dateTime?: string) => {
   if (dateTime) {
     output = (
       <time dateTime={dateTime} title={dateTime}>
-        {new Date(dateTime).toLocaleString()}
+        {new Date(dateTime).toUTCString()}
       </time>
     );
   }
