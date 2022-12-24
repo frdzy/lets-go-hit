@@ -3,6 +3,7 @@ import React from 'react';
 import humanize from 'humanize-string';
 
 const MAX_STRING_LENGTH = 150;
+const MS_IN_ONE_MINUTE = 60 * 1000;
 
 export const formatEnum = (values: string | string[] | null | undefined) => {
   let output = '';
@@ -15,6 +16,21 @@ export const formatEnum = (values: string | string[] | null | undefined) => {
   }
 
   return output;
+};
+
+export const formatDatetime = (isoTimeString: string | null) => {
+  if (!isoTimeString) {
+    return undefined;
+  }
+
+  const date = new Date(isoTimeString);
+  const dateLocalTruncatedString = new Date(
+    +date - date.getTimezoneOffset() * MS_IN_ONE_MINUTE
+  )
+    .toISOString()
+    .replace(/:\d{2}\.\d{3}\w/, '');
+
+  return dateLocalTruncatedString;
 };
 
 export const jsonDisplay = (obj: unknown) => {
@@ -45,7 +61,7 @@ export const timeTag = (dateTime?: string) => {
   if (dateTime) {
     output = (
       <time dateTime={dateTime} title={dateTime}>
-        {new Date(dateTime).toUTCString()}
+        {new Date(dateTime).toLocaleString()}
       </time>
     );
   }

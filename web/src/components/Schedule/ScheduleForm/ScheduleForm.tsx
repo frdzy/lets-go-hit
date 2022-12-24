@@ -10,12 +10,7 @@ import {
 
 import type { EditScheduleById, UpdateScheduleInput } from 'types/graphql';
 import type { RWGqlError } from '@redwoodjs/forms';
-
-const formatDatetime = (value) => {
-  if (value) {
-    return value.replace(/:\d{2}\.\d{3}\w/, '');
-  }
-};
+import { formatDatetime } from 'src/lib/formatters';
 
 type FormSchedule = NonNullable<EditScheduleById['schedule']>;
 
