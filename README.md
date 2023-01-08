@@ -18,7 +18,7 @@ TODOs:
 - [x] Recreate necessary frontend forms to properly utilize authentication
 - [x] Limit reservations and schedules to participants only
 - [x] Add underline of current section
-- [ ] Update datetime UI to display in local timezone (and fix test accordingly)
+- [x] Update datetime UI to display in local timezone (and fix test accordingly)
 
 Later:
 

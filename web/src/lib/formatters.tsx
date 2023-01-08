@@ -1,4 +1,5 @@
 import React from 'react';
+import { DateTime } from 'luxon';
 
 import humanize from 'humanize-string';
 
@@ -23,14 +24,11 @@ export const formatDatetime = (isoTimeString: string | null) => {
     return undefined;
   }
 
-  const date = new Date(isoTimeString);
-  const dateLocalTruncatedString = new Date(
-    +date - date.getTimezoneOffset() * MS_IN_ONE_MINUTE
-  )
-    .toISOString()
-    .replace(/:\d{2}\.\d{3}\w/, '');
-
-  return dateLocalTruncatedString;
+  const dateTimeLocalTruncated = DateTime.fromISO(isoTimeString)
+    .toISO() // adjusts with local timezone
+    .toString()
+    .replace(/:\d{2}\.\d{3}.*/, '');
+  return dateTimeLocalTruncated;
 };
 
 export const jsonDisplay = (obj: unknown) => {
@@ -61,7 +59,7 @@ export const timeTag = (dateTime?: string) => {
   if (dateTime) {
     output = (
       <time dateTime={dateTime} title={dateTime}>
-        {new Date(dateTime).toUTCString()}
+        {DateTime.fromISO(dateTime).toLocaleString(DateTime.DATETIME_MED)}
       </time>
     );
   }

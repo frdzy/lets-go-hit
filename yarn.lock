@@ -6150,6 +6150,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/luxon@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@types/luxon@npm:3.2.0"
+  checksum: d3574082d70cee8bad6ba683e5b81d4532b5ddcaefb986f0f4bd770fb71072456241d81c780cadf4857163119148d1ca6f8df36389446827eae17a609f4ed5c6
+  languageName: node
+  linkType: hard
+
 "@types/mdast@npm:^3.0.0":
   version: 3.0.10
   resolution: "@types/mdast@npm:3.0.10"
@@ -16688,6 +16695,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"luxon@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "luxon@npm:3.2.1"
+  checksum: 2edd1400c7a785b01fa24ab491675c490a763054e0e147507b7b64caa6caad50329b48d482300c7ab5dc1a2630aaf84997496ffe7d2e166f9ea223f6caa719d9
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.4.4":
   version: 1.4.4
   resolution: "lz-string@npm:1.4.4"
@@ -23647,8 +23661,10 @@ __metadata:
     "@redwoodjs/router": 3.5.0
     "@redwoodjs/web": 3.5.0
     "@simplewebauthn/browser": ^6.2.2
+    "@types/luxon": ^3.2.0
     autoprefixer: ^10.4.13
     humanize-string: 2.1.0
+    luxon: ^3.2.1
     postcss: ^8.4.20
     postcss-loader: ^7.0.2
     prop-types: 15.8.1
