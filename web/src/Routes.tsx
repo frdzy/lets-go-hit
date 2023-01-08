@@ -46,6 +46,34 @@ const Routes = () => {
         </Set>
         <Set
           wrap={ScaffoldLayout}
+          title="Reservations"
+          titleTo="reservations"
+          buttonLabel="New Reservation"
+          buttonTo="newReservation"
+        >
+          <Route
+            path="/reservations/new"
+            page={ReservationNewReservationPage}
+            name="newReservation"
+          />
+          <Route
+            path="/reservations/{id}/edit"
+            page={ReservationEditReservationPage}
+            name="editReservation"
+          />
+          <Route
+            path="/reservations/{id}"
+            page={ReservationReservationPage}
+            name="reservation"
+          />
+          <Route
+            path="/reservations"
+            page={ReservationReservationsPage}
+            name="reservations"
+          />
+        </Set>
+        <Set
+          wrap={ScaffoldLayout}
           title="Court Locations"
           titleTo="courtLocations"
           buttonLabel="New Court Location"

@@ -1,9 +1,14 @@
 export const schema = gql`
+  enum ConfirmationStatus {
+    invited
+    confirmed
+  }
+
   type Confirmation {
     id: ID!
     player: User!
     playerId: ID!
-    status: String
+    status: ConfirmationStatus!
     schedule: Schedule!
     scheduleId: ID!
   }

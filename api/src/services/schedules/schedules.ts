@@ -7,8 +7,17 @@ import type {
 import { db } from 'src/lib/db';
 import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
-export const schedules: QueryResolvers['schedules'] = () => {
-  return db.schedule.findMany();
+export const schedules: QueryResolvers['schedules'] = async () => {
+  const currentUser = getRequiredCurrentUser();
+  const userConfirmations = await db.confirmation.findMany({
+    where: {
+      playerId: currentUser.id,
+    },
+    include: {
+      schedule: true,
+    },
+  });
+  return userConfirmations.map((c) => c.schedule);
 };
 
 export const schedule: QueryResolvers['schedule'] = ({ id }) => {

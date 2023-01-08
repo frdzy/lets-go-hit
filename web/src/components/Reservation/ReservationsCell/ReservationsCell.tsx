@@ -1,22 +1,18 @@
-import type { FindSchedules } from 'types/graphql';
+import type { FindReservations } from 'types/graphql';
 
 import { Link, routes } from '@redwoodjs/router';
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
 
-import Schedules from 'src/components/Schedule/Schedules';
+import Reservations from 'src/components/Reservation/Reservations';
 
 export const QUERY = gql`
-  query FindSchedules {
-    schedules {
+  query FindReservations {
+    reservations {
       id
       beginTimestamp
-      reservationId
-      createdByUserId
-      confirmations {
-        id
-        playerId
-        status
-      }
+      endTimestamp
+      courtLocationId
+      byUserId
     }
   }
 `;
@@ -26,8 +22,8 @@ export const Loading = () => <div>Loading...</div>;
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No schedules yet. '}
-      <Link to={routes.newSchedule()} className="rw-link">
+      {'No reservations yet. '}
+      <Link to={routes.newReservation()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>
@@ -38,6 +34,8 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 );
 
-export const Success = ({ schedules }: CellSuccessProps<FindSchedules>) => {
-  return <Schedules schedules={schedules} />;
+export const Success = ({
+  reservations,
+}: CellSuccessProps<FindReservations>) => {
+  return <Reservations reservations={reservations} />;
 };

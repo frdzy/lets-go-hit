@@ -32,6 +32,9 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <Link to={routes.home()}>Home</Link>
           </li>
           <li>
+            <Link to={routes.reservations()}>Reservations</Link>
+          </li>
+          <li>
             <Link to={routes.schedules()}>Schedules</Link>
           </li>
           <li>

@@ -7,8 +7,13 @@ import type {
 import { db } from 'src/lib/db';
 import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
-export const reservations: QueryResolvers['reservations'] = () => {
-  return db.reservation.findMany();
+export const reservations: QueryResolvers['reservations'] = async () => {
+  const currentUser = getRequiredCurrentUser();
+  return await db.reservation.findMany({
+    where: {
+      byUserId: currentUser.id,
+    },
+  });
 };
 
 export const reservation: QueryResolvers['reservation'] = ({ id }) => {
