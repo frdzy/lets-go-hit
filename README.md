@@ -19,6 +19,7 @@ TODOs:
 - [x] Limit reservations and schedules to participants only
 - [x] Add underline of current section
 - [x] Update datetime UI to display in local timezone (and fix test accordingly)
+- [x] Update permalink with friendly strings
 
 Later:
 

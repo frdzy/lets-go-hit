@@ -3,7 +3,7 @@ import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
 
 import { QUERY } from 'src/components/CourtLocation/CourtLocationsCell';
-import { truncate } from 'src/lib/formatters';
+import { formatNameForUrl, truncate } from 'src/lib/formatters';
 
 import type {
   DeleteCourtLocationMutationVariables,
@@ -63,7 +63,10 @@ const CourtLocationsList = ({ courtLocations }: FindCourtLocations) => {
               <td>
                 <nav className="rw-table-actions">
                   <Link
-                    to={routes.courtLocation({ id: courtLocation.id })}
+                    to={routes.courtLocationWithName({
+                      id: courtLocation.id,
+                      optionalName: formatNameForUrl(courtLocation.name),
+                    })}
                     title={'Show courtLocation ' + courtLocation.id + ' detail'}
                     className="rw-button rw-button-small"
                   >

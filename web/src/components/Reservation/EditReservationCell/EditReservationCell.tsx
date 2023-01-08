@@ -11,7 +11,7 @@ import { toast } from '@redwoodjs/web/toast';
 import ReservationForm from 'src/components/Reservation/ReservationForm';
 
 export const QUERY = gql`
-  query EditReservationById($id: String!) {
+  query EditReservationById($id: ID!) {
     reservation: reservation(id: $id) {
       id
       beginTimestamp
@@ -23,7 +23,7 @@ export const QUERY = gql`
 `;
 const UPDATE_RESERVATION_MUTATION = gql`
   mutation UpdateReservationMutation(
-    $id: String!
+    $id: ID!
     $input: UpdateReservationInput!
   ) {
     updateReservation(id: $id, input: $input) {

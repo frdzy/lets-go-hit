@@ -5,7 +5,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
 import Reservation from 'src/components/Reservation/Reservation';
 
 export const QUERY = gql`
-  query FindReservationById($id: String!) {
+  query FindReservationById($id: ID!) {
     reservation: reservation(id: $id) {
       id
       beginTimestamp

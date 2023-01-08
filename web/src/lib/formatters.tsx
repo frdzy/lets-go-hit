@@ -4,7 +4,10 @@ import { DateTime } from 'luxon';
 import humanize from 'humanize-string';
 
 const MAX_STRING_LENGTH = 150;
-const MS_IN_ONE_MINUTE = 60 * 1000;
+
+export const formatNameForUrl = (name: string): string => {
+  return name.toLowerCase().replaceAll(' ', '-');
+};
 
 export const formatEnum = (values: string | string[] | null | undefined) => {
   let output = '';

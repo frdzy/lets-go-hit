@@ -36,13 +36,13 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="activeLink" to={routes.reservations()}>
-              Reservations
+            <NavLink activeClassName="activeLink" to={routes.schedules()}>
+              Schedules
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="activeLink" to={routes.schedules()}>
-              Schedules
+            <NavLink activeClassName="activeLink" to={routes.reservations()}>
+              Reservations
             </NavLink>
           </li>
           <li>

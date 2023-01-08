@@ -11,7 +11,7 @@ import type {
 } from 'types/graphql';
 
 const DELETE_RESERVATION_MUTATION = gql`
-  mutation DeleteReservationMutation($id: String!) {
+  mutation DeleteReservationMutation($id: ID!) {
     deleteReservation(id: $id) {
       id
     }

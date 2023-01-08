@@ -95,6 +95,11 @@ const Routes = () => {
             name="courtLocation"
           />
           <Route
+            path="/court-locations/{id}/{optionalName}"
+            page={CourtLocationCourtLocationPage}
+            name="courtLocationWithName"
+          />
+          <Route
             path="/court-locations"
             page={CourtLocationCourtLocationsPage}
             name="courtLocations"
