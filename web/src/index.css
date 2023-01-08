@@ -66,3 +66,6 @@ textarea.error {
 .flex-between button {
   display: inline;
 }
+a.activeLink {
+  text-decoration: underline;
+}

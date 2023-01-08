@@ -1,5 +1,5 @@
 import { useAuth } from '@redwoodjs/auth';
-import { Link, routes } from '@redwoodjs/router';
+import { NavLink, routes } from '@redwoodjs/router';
 
 type AppLayoutProps = {
   children?: React.ReactNode;
@@ -22,23 +22,33 @@ const AppLayout = ({ children }: AppLayoutProps) => {
               </button>
             </>
           ) : (
-            <Link to={routes.login()}>Login</Link>
+            <NavLink activeClassName="activeLink" to={routes.login()}>
+              Login
+            </NavLink>
           )}
         </div>
       </header>
       <nav className="my-2 px-4">
         <ul>
           <li>
-            <Link to={routes.home()}>Home</Link>
+            <NavLink activeClassName="activeLink" to={routes.home()}>
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to={routes.reservations()}>Reservations</Link>
+            <NavLink activeClassName="activeLink" to={routes.reservations()}>
+              Reservations
+            </NavLink>
           </li>
           <li>
-            <Link to={routes.schedules()}>Schedules</Link>
+            <NavLink activeClassName="activeLink" to={routes.schedules()}>
+              Schedules
+            </NavLink>
           </li>
           <li>
-            <Link to={routes.courtLocations()}>Courts</Link>
+            <NavLink activeClassName="activeLink" to={routes.courtLocations()}>
+              Courts
+            </NavLink>
           </li>
         </ul>
       </nav>

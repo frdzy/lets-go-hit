@@ -17,6 +17,8 @@ TODOs:
 - [x] Deploy to [Render](https://render.com/docs/deploy-redwood)
 - [x] Recreate necessary frontend forms to properly utilize authentication
 - [x] Limit reservations and schedules to participants only
+- [x] Add underline of current section
+- [ ] Update datetime UI to display in local timezone (and fix test accordingly)
 
 Later:
 
