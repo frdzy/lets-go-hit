@@ -1,6 +1,9 @@
 import { Link, routes } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
+import { CreatorReference } from 'src/components/CreatorReference';
+import { Details } from 'src/components/Details';
+import { Reference } from 'src/components/Reference';
 
 import { QUERY } from 'src/components/Schedule/SchedulesCell';
 import { timeTag, truncate } from 'src/lib/formatters';
@@ -47,75 +50,31 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
             <th>Id</th>
             <th>Begin timestamp</th>
             <th>Reservation</th>
-            <th>Created by user id</th>
+            <th>Created by user</th>
           </tr>
         </thead>
         <tbody>
           {schedules.map((schedule) => (
             <tr key={schedule.id}>
               <td>
-                <Link
-                  to={routes.schedule({ id: schedule.id })}
-                  title={'Show schedule ' + schedule.id + ' detail'}
-                  className="rw-button"
-                >
-                  {truncate(schedule.id)}
-                </Link>
-
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.editSchedule({ id: schedule.id })}
-                    title={'Edit schedule ' + schedule.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={'Delete schedule ' + schedule.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(schedule.id)}
-                  >
-                    Delete
-                  </button>
-                </nav>
+                <Details
+                  referenceTarget={schedule}
+                  routeToDetails={(id) => routes.schedule({ id })}
+                  routeToEdit={(id) => routes.editSchedule({ id })}
+                  onDelete={onDeleteClick}
+                />
               </td>
-
               <td>{timeTag(schedule.beginTimestamp)}</td>
               <td>
-                <div>
-                  {schedule.reservation ? (
-                    <>
-                      <Link
-                        to={routes.reservation({ id: schedule.reservation.id })}
-                        title={'Show reservation ' + schedule.reservation.id}
-                        className="rw-button"
-                      >
-                        {schedule.reservation.id}
-                      </Link>
-                      <nav className="rw-table-actions">
-                        <button
-                          type="button"
-                          title={'Detach reservation'}
-                          className="rw-button rw-button-small rw-button-red"
-                          onClick={() => onDeleteClick(schedule.id)}
-                        >
-                          Detach
-                        </button>
-                      </nav>
-                    </>
-                  ) : (
-                    <Link
-                      to={routes.newReservation()}
-                      title={'Create reservation'}
-                      className="rw-button rw-button-small rw-button-blue"
-                    >
-                      Create
-                    </Link>
-                  )}
-                </div>
+                <Reference
+                  referenceTarget={schedule.reservation}
+                  routeToCreate={routes.newReservation}
+                  routeToDetails={(id) => routes.reservation({ id: id })}
+                />
               </td>
-              <td>{truncate(schedule.createdByUser.id)}</td>
+              <td>
+                <CreatorReference referenceTarget={schedule.createdByUser} />
+              </td>
             </tr>
           ))}
         </tbody>

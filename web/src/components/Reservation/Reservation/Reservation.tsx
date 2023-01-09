@@ -1,6 +1,8 @@
 import { Link, routes, navigate } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
+import { CreatorReference } from 'src/components/CreatorReference';
+import { Reference } from 'src/components/Reference';
 
 import { timeTag } from 'src/lib/formatters';
 
@@ -61,12 +63,19 @@ const Reservation = ({ reservation }: Props) => {
               <td>{timeTag(reservation.endTimestamp)}</td>
             </tr>
             <tr>
-              <th>Court location id</th>
-              <td>{reservation.courtLocationId}</td>
+              <th>Court location</th>
+              <td>
+                <Reference
+                  referenceTarget={reservation.courtLocation}
+                  routeToDetails={(id) => routes.courtLocation({ id })}
+                />
+              </td>
             </tr>
             <tr>
-              <th>By user id</th>
-              <td>{reservation.byUserId}</td>
+              <th>By user</th>
+              <td>
+                <CreatorReference referenceTarget={reservation.byUser} />
+              </td>
             </tr>
           </tbody>
         </table>

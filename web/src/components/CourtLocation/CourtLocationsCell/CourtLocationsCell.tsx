@@ -12,7 +12,10 @@ export const QUERY = gql`
       name
       address
       notes
-      addedById
+      addedBy {
+        id
+        name
+      }
     }
   }
 `;

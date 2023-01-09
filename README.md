@@ -21,6 +21,8 @@ TODOs:
 - [x] Update datetime UI to display in local timezone (and fix test accordingly)
 - [x] Update permalink with friendly strings
 - [x] Replace /schedules view of "Reservation id" with a Reservation cell
+- [x] Also replace other reference-type cells
+- [ ] "Attach" feature to search for a Reference
 
 Later:
 

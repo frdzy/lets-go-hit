@@ -10,8 +10,14 @@ export const QUERY = gql`
       id
       beginTimestamp
       endTimestamp
-      courtLocationId
-      byUserId
+      courtLocation {
+        id
+        name
+      }
+      byUser {
+        id
+        name
+      }
     }
   }
 `;

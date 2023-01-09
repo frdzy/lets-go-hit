@@ -1,6 +1,8 @@
 import { Link, routes, navigate } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
+import { CreatorReference } from 'src/components/CreatorReference';
+import { Reference } from 'src/components/Reference';
 
 import { timeTag } from 'src/lib/formatters';
 
@@ -59,40 +61,18 @@ const Schedule = ({ schedule }: Props) => {
             <tr>
               <th>Reservation</th>
               <td>
-                {schedule.reservation ? (
-                  <>
-                    <Link
-                      to={routes.reservation({ id: schedule.reservation.id })}
-                      title={'Show reservation ' + schedule.reservation.id}
-                      className="rw-button"
-                    >
-                      {schedule.reservation.id}
-                    </Link>
-                    <nav className="rw-table-actions">
-                      <button
-                        type="button"
-                        title={'Detach reservation'}
-                        className="rw-button rw-button-small rw-button-red"
-                        onClick={() => onDeleteClick(schedule.id)}
-                      >
-                        Detach
-                      </button>
-                    </nav>
-                  </>
-                ) : (
-                  <Link
-                    to={routes.newReservation()}
-                    title={'Create reservation'}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Create
-                  </Link>
-                )}
+                <Reference
+                  referenceTarget={schedule.reservation}
+                  routeToCreate={routes.newReservation}
+                  routeToDetails={(id) => routes.reservation({ id: id })}
+                />
               </td>
             </tr>
             <tr>
-              <th>Created by user id</th>
-              <td>{schedule.createdByUser.id}</td>
+              <th>Created by user</th>
+              <td>
+                <CreatorReference referenceTarget={schedule.createdByUser} />
+              </td>
             </tr>
           </tbody>
         </table>

@@ -15,6 +15,7 @@ export const QUERY = gql`
       }
       createdByUser {
         id
+        name
       }
       confirmations {
         id

@@ -1,6 +1,9 @@
 import { Link, routes } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
+import { CreatorReference } from 'src/components/CreatorReference';
+import { Details } from 'src/components/Details';
+import { Reference } from 'src/components/Reference';
 
 import { QUERY } from 'src/components/Reservation/ReservationsCell';
 import { timeTag, truncate } from 'src/lib/formatters';
@@ -47,44 +50,31 @@ const ReservationsList = ({ reservations }: FindReservations) => {
             <th>Id</th>
             <th>Begin timestamp</th>
             <th>End timestamp</th>
-            <th>Court location id</th>
-            <th>By user id</th>
-            <th>&nbsp;</th>
+            <th>Court location</th>
+            <th>By user</th>
           </tr>
         </thead>
         <tbody>
           {reservations.map((reservation) => (
             <tr key={reservation.id}>
-              <td>{truncate(reservation.id)}</td>
+              <td>
+                <Details
+                  referenceTarget={reservation}
+                  routeToDetails={(id) => routes.reservation({ id })}
+                  routeToEdit={(id) => routes.editReservation({ id })}
+                  onDelete={onDeleteClick}
+                />
+              </td>
               <td>{timeTag(reservation.beginTimestamp)}</td>
               <td>{timeTag(reservation.endTimestamp)}</td>
-              <td>{truncate(reservation.courtLocationId)}</td>
-              <td>{truncate(reservation.byUserId)}</td>
               <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.reservation({ id: reservation.id })}
-                    title={'Show reservation ' + reservation.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editReservation({ id: reservation.id })}
-                    title={'Edit reservation ' + reservation.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={'Delete reservation ' + reservation.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(reservation.id)}
-                  >
-                    Delete
-                  </button>
-                </nav>
+                <Reference
+                  referenceTarget={reservation.courtLocation}
+                  routeToDetails={(id) => routes.courtLocation({ id })}
+                />
+              </td>
+              <td>
+                <CreatorReference referenceTarget={reservation.byUser} />
               </td>
             </tr>
           ))}

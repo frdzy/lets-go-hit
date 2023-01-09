@@ -3,7 +3,9 @@ import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
 
 import { QUERY } from 'src/components/CourtLocation/CourtLocationsCell';
-import { formatNameForUrl, truncate } from 'src/lib/formatters';
+import { CreatorReference } from 'src/components/CreatorReference';
+import { Details } from 'src/components/Details';
+import { truncate } from 'src/lib/formatters';
 
 import type {
   DeleteCourtLocationMutationVariables,
@@ -44,50 +46,27 @@ const CourtLocationsList = ({ courtLocations }: FindCourtLocations) => {
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Address</th>
             <th>Notes</th>
-            <th>Added by id</th>
-            <th>&nbsp;</th>
+            <th>Added by</th>
           </tr>
         </thead>
         <tbody>
           {courtLocations.map((courtLocation) => (
             <tr key={courtLocation.id}>
-              <td>{truncate(courtLocation.id)}</td>
-              <td>{truncate(courtLocation.name)}</td>
+              <td>
+                <Details
+                  referenceTarget={courtLocation}
+                  routeToDetails={(id) => routes.courtLocation({ id })}
+                  routeToEdit={(id) => routes.editCourtLocation({ id })}
+                  onDelete={onDeleteClick}
+                />
+              </td>
               <td>{truncate(courtLocation.address)}</td>
               <td>{truncate(courtLocation.notes)}</td>
-              <td>{truncate(courtLocation.addedById)}</td>
               <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.courtLocationWithName({
-                      id: courtLocation.id,
-                      optionalName: formatNameForUrl(courtLocation.name),
-                    })}
-                    title={'Show courtLocation ' + courtLocation.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editCourtLocation({ id: courtLocation.id })}
-                    title={'Edit courtLocation ' + courtLocation.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={'Delete courtLocation ' + courtLocation.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(courtLocation.id)}
-                  >
-                    Delete
-                  </button>
-                </nav>
+                <CreatorReference referenceTarget={courtLocation.addedBy} />
               </td>
             </tr>
           ))}

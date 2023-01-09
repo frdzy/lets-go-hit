@@ -14,6 +14,7 @@ export const QUERY = gql`
       }
       createdByUser {
         id
+        name
       }
     }
   }
