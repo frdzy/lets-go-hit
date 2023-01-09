@@ -20,6 +20,7 @@ TODOs:
 - [x] Add underline of current section
 - [x] Update datetime UI to display in local timezone (and fix test accordingly)
 - [x] Update permalink with friendly strings
+- [x] Replace /schedules view of "Reservation id" with a Reservation cell
 
 Later:
 

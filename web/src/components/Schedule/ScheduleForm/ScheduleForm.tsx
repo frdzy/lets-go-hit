@@ -64,7 +64,7 @@ const ScheduleForm = (props: ScheduleFormProps) => {
 
         <TextField
           name="reservationId"
-          defaultValue={props.schedule?.reservationId}
+          defaultValue={props.schedule?.reservation?.id}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />

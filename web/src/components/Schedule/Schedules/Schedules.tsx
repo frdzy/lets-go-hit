@@ -46,27 +46,23 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
           <tr>
             <th>Id</th>
             <th>Begin timestamp</th>
-            <th>Reservation id</th>
+            <th>Reservation</th>
             <th>Created by user id</th>
-            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           {schedules.map((schedule) => (
             <tr key={schedule.id}>
-              <td>{truncate(schedule.id)}</td>
-              <td>{timeTag(schedule.beginTimestamp)}</td>
-              <td>{truncate(schedule.reservationId)}</td>
-              <td>{truncate(schedule.createdByUserId)}</td>
               <td>
+                <Link
+                  to={routes.schedule({ id: schedule.id })}
+                  title={'Show schedule ' + schedule.id + ' detail'}
+                  className="rw-button"
+                >
+                  {truncate(schedule.id)}
+                </Link>
+
                 <nav className="rw-table-actions">
-                  <Link
-                    to={routes.schedule({ id: schedule.id })}
-                    title={'Show schedule ' + schedule.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
                   <Link
                     to={routes.editSchedule({ id: schedule.id })}
                     title={'Edit schedule ' + schedule.id}
@@ -84,6 +80,42 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
                   </button>
                 </nav>
               </td>
+
+              <td>{timeTag(schedule.beginTimestamp)}</td>
+              <td>
+                <div>
+                  {schedule.reservation ? (
+                    <>
+                      <Link
+                        to={routes.reservation({ id: schedule.reservation.id })}
+                        title={'Show reservation ' + schedule.reservation.id}
+                        className="rw-button"
+                      >
+                        {schedule.reservation.id}
+                      </Link>
+                      <nav className="rw-table-actions">
+                        <button
+                          type="button"
+                          title={'Detach reservation'}
+                          className="rw-button rw-button-small rw-button-red"
+                          onClick={() => onDeleteClick(schedule.id)}
+                        >
+                          Detach
+                        </button>
+                      </nav>
+                    </>
+                  ) : (
+                    <Link
+                      to={routes.newReservation()}
+                      title={'Create reservation'}
+                      className="rw-button rw-button-small rw-button-blue"
+                    >
+                      Create
+                    </Link>
+                  )}
+                </div>
+              </td>
+              <td>{truncate(schedule.createdByUser.id)}</td>
             </tr>
           ))}
         </tbody>

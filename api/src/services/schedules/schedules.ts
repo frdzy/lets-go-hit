@@ -26,14 +26,22 @@ export const schedule: QueryResolvers['schedule'] = ({ id }) => {
   });
 };
 
-export const createSchedule: MutationResolvers['createSchedule'] = ({
+export const createSchedule: MutationResolvers['createSchedule'] = async ({
   input,
 }) => {
   const currentUser = getRequiredCurrentUser();
   const createdByUserId = currentUser.id;
-  return db.schedule.create({
+  const result = await db.schedule.create({
     data: { ...input, createdByUserId },
   });
+  await db.confirmation.create({
+    data: {
+      scheduleId: result.id,
+      status: 'confirmed',
+      playerId: currentUser.id,
+    },
+  });
+  return result;
 };
 
 export const updateSchedule: MutationResolvers['updateSchedule'] = ({

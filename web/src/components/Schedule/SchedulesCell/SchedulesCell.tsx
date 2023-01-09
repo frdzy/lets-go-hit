@@ -10,8 +10,12 @@ export const QUERY = gql`
     schedules {
       id
       beginTimestamp
-      reservationId
-      createdByUserId
+      reservation {
+        id
+      }
+      createdByUser {
+        id
+      }
       confirmations {
         id
         playerId

@@ -12,8 +12,12 @@ export const QUERY = gql`
     schedule: schedule(id: $id) {
       id
       beginTimestamp
-      reservationId
-      createdByUserId
+      reservation {
+        id
+      }
+      createdByUser {
+        id
+      }
     }
   }
 `;
@@ -22,8 +26,9 @@ const UPDATE_SCHEDULE_MUTATION = gql`
     updateSchedule(id: $id, input: $input) {
       id
       beginTimestamp
-      reservationId
-      createdByUserId
+      reservation {
+        id
+      }
     }
   }
 `;

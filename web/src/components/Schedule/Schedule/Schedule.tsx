@@ -57,12 +57,42 @@ const Schedule = ({ schedule }: Props) => {
               <td>{timeTag(schedule.beginTimestamp)}</td>
             </tr>
             <tr>
-              <th>Reservation id</th>
-              <td>{schedule.reservationId}</td>
+              <th>Reservation</th>
+              <td>
+                {schedule.reservation ? (
+                  <>
+                    <Link
+                      to={routes.reservation({ id: schedule.reservation.id })}
+                      title={'Show reservation ' + schedule.reservation.id}
+                      className="rw-button"
+                    >
+                      {schedule.reservation.id}
+                    </Link>
+                    <nav className="rw-table-actions">
+                      <button
+                        type="button"
+                        title={'Detach reservation'}
+                        className="rw-button rw-button-small rw-button-red"
+                        onClick={() => onDeleteClick(schedule.id)}
+                      >
+                        Detach
+                      </button>
+                    </nav>
+                  </>
+                ) : (
+                  <Link
+                    to={routes.newReservation()}
+                    title={'Create reservation'}
+                    className="rw-button rw-button-small rw-button-blue"
+                  >
+                    Create
+                  </Link>
+                )}
+              </td>
             </tr>
             <tr>
               <th>Created by user id</th>
-              <td>{schedule.createdByUserId}</td>
+              <td>{schedule.createdByUser.id}</td>
             </tr>
           </tbody>
         </table>

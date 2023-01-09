@@ -3,9 +3,7 @@ export const schema = gql`
     id: ID!
     beginTimestamp: DateTime!
     reservation: Reservation
-    reservationId: ID
     createdByUser: User!
-    createdByUserId: ID!
     confirmations: [Confirmation]!
   }
 

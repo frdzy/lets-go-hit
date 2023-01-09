@@ -9,8 +9,12 @@ export const QUERY = gql`
     schedule: schedule(id: $id) {
       id
       beginTimestamp
-      reservationId
-      createdByUserId
+      reservation {
+        id
+      }
+      createdByUser {
+        id
+      }
     }
   }
 `;
