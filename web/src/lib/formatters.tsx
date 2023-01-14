@@ -62,7 +62,7 @@ export const timeTag = (dateTime?: string) => {
   if (dateTime) {
     output = (
       <time dateTime={dateTime} title={dateTime}>
-        {DateTime.fromISO(dateTime).toLocaleString(DateTime.DATETIME_MED)}
+        {DateTime.fromISO(dateTime).toLocaleString(DateTime.DATETIME_MED_WITH_WEEKDAY)}
       </time>
     );
   }
