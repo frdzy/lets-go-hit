@@ -17,7 +17,9 @@ export const schedules: QueryResolvers['schedules'] = async () => {
       schedule: true,
     },
   });
-  return userConfirmations.map((c) => c.schedule);
+  const schedules = userConfirmations.map((c) => c.schedule);
+  schedules.sort((a, b) => +b.beginTimestamp - +a.beginTimestamp);
+  return schedules;
 };
 
 export const schedule: QueryResolvers['schedule'] = ({ id }) => {

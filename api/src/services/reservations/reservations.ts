@@ -13,6 +13,9 @@ export const reservations: QueryResolvers['reservations'] = async () => {
     where: {
       byUserId: currentUser.id,
     },
+    orderBy: {
+      beginTimestamp: 'desc',
+    },
   });
 };
 
