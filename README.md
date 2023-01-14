@@ -22,7 +22,9 @@ TODOs:
 - [x] Update permalink with friendly strings
 - [x] Replace /schedules view of "Reservation id" with a Reservation cell
 - [x] Also replace other reference-type cells
+- [ ] Order Schedules and Reservations entries by time descending
 - [ ] "Attach" feature to search for a Reference
+- [ ] On narrow viewports (e.g. vertical phone screen), improve table-of-objects UI
 
 Later:
 
