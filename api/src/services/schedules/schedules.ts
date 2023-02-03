@@ -56,8 +56,15 @@ export const updateSchedule: MutationResolvers['updateSchedule'] = ({
   });
 };
 
-export const deleteSchedule: MutationResolvers['deleteSchedule'] = ({ id }) => {
-  return db.schedule.delete({
+export const deleteSchedule: MutationResolvers['deleteSchedule'] = async ({
+  id,
+}) => {
+  await db.confirmation.deleteMany({
+    where: {
+      scheduleId: id,
+    },
+  });
+  return await db.schedule.delete({
     where: { id },
   });
 };
