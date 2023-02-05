@@ -190,11 +190,11 @@ export const handler = async (
       domain:
         process.env.NODE_ENV === 'development'
           ? 'localhost'
-          : 'lets-go-play-tennis-web.onrender.com',
+          : 'letsgoplaytennis.app',
       origin:
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:8910'
-          : 'https://lets-go-play-tennis-web.onrender.com',
+          : 'https://letsgoplaytennis.app',
       type: 'platform',
       timeout: 60000,
       credentialFields: {
