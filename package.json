@@ -23,5 +23,8 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.2.4",
+  "dependencies": {
+    "tailwindcss-classnames": "^3.1.0"
+  }
 }

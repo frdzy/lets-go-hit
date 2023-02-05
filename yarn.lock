@@ -1908,7 +1908,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@colors/colors@npm:1.5.0":
+"@colors/colors@npm:1.5.0, @colors/colors@npm:^1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
   checksum: eb42729851adca56d19a08e48d5a1e95efd2a32c55ae0323de8119052be0510d4b7a1611f2abcbf28c044a6c11e6b7d38f99fccdad7429300c37a8ea5fb95b44
@@ -9482,6 +9482,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^1.1.1":
+  version: 1.2.1
+  resolution: "clsx@npm:1.2.1"
+  checksum: 34dead8bee24f5e96f6e7937d711978380647e936a22e76380290e35486afd8634966ce300fc4b74a32f3762c7d4c0303f442c3e259f4ce02374eb0c82834f27
+  languageName: node
+  linkType: hard
+
 "co@npm:^4.6.0":
   version: 4.6.0
   resolution: "co@npm:4.6.0"
@@ -14352,7 +14359,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:^8.0.0, inquirer@npm:^8.2.0":
+"inquirer@npm:^8.0.0, inquirer@npm:^8.1.1, inquirer@npm:^8.2.0":
   version: 8.2.5
   resolution: "inquirer@npm:8.2.5"
   dependencies:
@@ -16194,6 +16201,7 @@ __metadata:
   dependencies:
     "@redwoodjs/core": 3.5.0
     prettier-plugin-tailwindcss: ^0.2.1
+    tailwindcss-classnames: ^3.1.0
   languageName: unknown
   linkType: soft
 
@@ -22114,6 +22122,22 @@ __metadata:
     systeminformation: lib/cli.js
   checksum: a96f0b7c2edd16deb5ccb85a4075e51e6e2f94afb1e65fdf4ac46e6e598ae4b9d2598a944e8ba7ac81d66a1b4a55647967904b8249122416209e69be31181c1d
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
+  languageName: node
+  linkType: hard
+
+"tailwindcss-classnames@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "tailwindcss-classnames@npm:3.1.0"
+  dependencies:
+    "@colors/colors": ^1.5.0
+    clsx: ^1.1.1
+    commander: ^7.0.0
+    inquirer: ^8.1.1
+    lodash: ^4.17.15
+    tslib: ^2.0.0
+  bin:
+    tailwindcss-classnames: lib/cli/index.js
+  checksum: ddcc9bce3817347396755f4bbc66ef497a184d49553f4c8f00f5110d3ff045a5b24a48e68073eb905d0eb7bb23b8b7df407e07b08fe8b7212c8b1cc1d035ebaa
   languageName: node
   linkType: hard
 

@@ -7,8 +7,9 @@ import type {
 import { db } from 'src/lib/db';
 import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
-export const schedules: QueryResolvers['schedules'] = async () => {
+export const schedules: QueryResolvers['schedules'] = async (input) => {
   const currentUser = getRequiredCurrentUser();
+  const { filter } = input;
   const userConfirmations = await db.confirmation.findMany({
     where: {
       playerId: currentUser.id,
@@ -19,7 +20,14 @@ export const schedules: QueryResolvers['schedules'] = async () => {
   });
   const schedules = userConfirmations.map((c) => c.schedule);
   schedules.sort((a, b) => +b.beginTimestamp - +a.beginTimestamp);
-  return schedules;
+  return schedules.filter((s) => {
+    return (
+      filter === undefined ||
+      (filter === 'myUpcoming' &&
+        +s.beginTimestamp > +Date.now() - 24 * 60 * 60 * 1000) ||
+      (filter === 'myPast' && +s.beginTimestamp < +Date.now())
+    );
+  });
 };
 
 export const schedule: QueryResolvers['schedule'] = ({ id }) => {

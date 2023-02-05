@@ -7,8 +7,13 @@ export const schema = gql`
     confirmations: [Confirmation]!
   }
 
+  enum ScheduleFilterType {
+    myUpcoming
+    myPast
+  }
+
   type Query {
-    schedules: [Schedule!]! @requireAuth
+    schedules(filter: ScheduleFilterType): [Schedule!]! @requireAuth
     schedule(id: ID!): Schedule @requireAuth
   }
 
