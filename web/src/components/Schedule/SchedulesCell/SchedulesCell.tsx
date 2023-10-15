@@ -6,8 +6,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
 import Schedules from 'src/components/Schedule/Schedules';
 
 export const QUERY = gql`
-  query FindSchedules {
-    schedules {
+  query FindSchedules($filter: ScheduleFilterType) {
+    schedules(filter: $filter) {
       id
       beginTimestamp
       reservation {
