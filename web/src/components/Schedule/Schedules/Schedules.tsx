@@ -47,8 +47,7 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Begin timestamp</th>
+            <th>Name</th>
             <th>Reservation</th>
             <th>Created by user</th>
           </tr>
@@ -58,13 +57,15 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
             <tr key={schedule.id}>
               <td>
                 <Details
-                  referenceTarget={schedule}
+                  referenceTarget={{
+                    ...schedule,
+                    name: timeTag(schedule.beginTimestamp),
+                  }}
                   routeToDetails={(id) => routes.schedule({ id })}
                   routeToEdit={(id) => routes.editSchedule({ id })}
                   onDelete={onDeleteClick}
                 />
               </td>
-              <td>{timeTag(schedule.beginTimestamp)}</td>
               <td>
                 <Reference
                   referenceTarget={schedule.reservation}

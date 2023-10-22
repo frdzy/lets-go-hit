@@ -1,7 +1,7 @@
 import { Link } from '@redwoodjs/router';
 
 type Props = {
-  referenceTarget: { id: string; name?: string };
+  referenceTarget: { id: string; name?: string | React.ReactNode };
   routeToDetails: (id: string) => string;
   routeToEdit: (id: string) => string;
   onDelete: (id: string) => void;
