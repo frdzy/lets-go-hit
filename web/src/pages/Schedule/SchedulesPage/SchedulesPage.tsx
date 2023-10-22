@@ -1,7 +1,7 @@
 import { MetaTags } from '@redwoodjs/web';
 import { Link, routes } from '@redwoodjs/router';
 import SchedulesCell from 'src/components/Schedule/SchedulesCell';
-import { classnames } from 'tailwindcss-classnames';
+import { classnames, spacing, typography } from 'tailwindcss-classnames';
 
 type Props = {
   type?: 'myUpcoming' | 'myPast';
@@ -14,9 +14,12 @@ function ScheduleFilterOption(
   return (
     <Link to={routes.schedules({ type: props.myType })}>
       <span
-        className={classnames('mx-4', {
-          underline: props.myType === props.type,
-        })}
+        className={classnames(
+          spacing('mx-4'),
+          typography({
+            underline: props.myType === props.type,
+          })
+        )}
       >
         {props.children}
       </span>

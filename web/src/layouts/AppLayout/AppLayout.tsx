@@ -33,7 +33,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           Let's Go Play Tennis
         </h1>
         <div className="grow" />
-        <div className="mx-2 my-4 max-w-xs rounded-xl bg-slate-50 p-2">
+        <div className="mx-2 my-auto max-w-xs rounded-xl bg-slate-50 p-2">
           {isAuthenticated && currentUser ? (
             <>
               <span>Logged in as {currentUser.email}</span>{' '}
@@ -50,7 +50,12 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       </header>
       <nav className="mx-3 my-2 flex sm:justify-center">
         {navItems.map((o) => (
-          <NavLink className="mx-3" activeClassName="activeLink" to={o.to}>
+          <NavLink
+            key={o.label}
+            className="mx-3"
+            activeClassName="activeLink"
+            to={o.to}
+          >
             {o.label}
           </NavLink>
         ))}

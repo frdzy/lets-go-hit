@@ -19,7 +19,7 @@ const ScaffoldLayout = ({
 }: LayoutProps) => {
   return (
     <AppLayout>
-      <div className="rw-scaffold">
+      <div className="rw-scaffold container mx-auto my-12">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <header className="sm:flex">
           <h2 className="rw-heading rw-heading-primary my-2">
