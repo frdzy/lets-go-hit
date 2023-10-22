@@ -1,6 +1,25 @@
 import { useAuth } from '@redwoodjs/auth';
 import { NavLink, routes } from '@redwoodjs/router';
 
+const navItems = [
+  {
+    to: routes.home(),
+    label: 'Home',
+  },
+  {
+    to: routes.schedules(),
+    label: 'Schedules',
+  },
+  {
+    to: routes.reservations(),
+    label: 'Reservations',
+  },
+  {
+    to: routes.courtLocations(),
+    label: 'Courts',
+  },
+];
+
 type AppLayoutProps = {
   children?: React.ReactNode;
 };
@@ -9,10 +28,11 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth();
   return (
     <>
-      <header className="md:flex">
+      <header className="sm:flex">
         <h1 className="font-xl my-auto px-4 pt-2 text-xl">
           Let's Go Play Tennis
         </h1>
+        <div className="grow" />
         <div className="mx-2 my-4 max-w-xs rounded-xl bg-slate-50 p-2">
           {isAuthenticated && currentUser ? (
             <>
@@ -28,31 +48,14 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           )}
         </div>
       </header>
-      <nav className="my-2 px-4">
-        <ul>
-          <li>
-            <NavLink activeClassName="activeLink" to={routes.home()}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="activeLink" to={routes.schedules()}>
-              Schedules
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="activeLink" to={routes.reservations()}>
-              Reservations
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="activeLink" to={routes.courtLocations()}>
-              Courts
-            </NavLink>
-          </li>
-        </ul>
+      <nav className="mx-3 my-2 flex sm:justify-center">
+        {navItems.map((o) => (
+          <NavLink className="mx-3" activeClassName="activeLink" to={o.to}>
+            {o.label}
+          </NavLink>
+        ))}
       </nav>
-      <main className="rw-main my-2 px-2">{children}</main>
+      <main className="rw-main my-2 px-2 sm:px-8">{children}</main>
     </>
   );
 };
