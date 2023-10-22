@@ -19,7 +19,7 @@ export const schedules: QueryResolvers['schedules'] = async (input) => {
     },
   });
   const schedules = userConfirmations.map((c) => c.schedule);
-  schedules.sort((a, b) => +b.beginTimestamp - +a.beginTimestamp);
+  schedules.sort((a, b) => +a.beginTimestamp - +b.beginTimestamp);
   return schedules.filter((s) => {
     return (
       filter === undefined ||
