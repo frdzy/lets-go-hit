@@ -1,31 +1,31 @@
 import { useAuth } from '@redwoodjs/auth';
 import { NavLink, routes } from '@redwoodjs/router';
 
-const navItems = [
-  {
-    to: routes.home(),
-    label: 'Home',
-  },
-  {
-    to: routes.schedules(),
-    label: 'Schedules',
-  },
-  {
-    to: routes.reservations(),
-    label: 'Reservations',
-  },
-  {
-    to: routes.courtLocations(),
-    label: 'Courts',
-  },
-];
-
 type AppLayoutProps = {
   children?: React.ReactNode;
 };
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth();
+  const navItems = [
+    {
+      to: routes.home(),
+      label: 'Home',
+    },
+    {
+      to: routes.schedules(),
+      label: 'Schedules',
+    },
+    {
+      to: routes.reservations(),
+      label: 'Reservations',
+    },
+    {
+      to: routes.courtLocations(),
+      label: 'Courts',
+    },
+  ];
+
   return (
     <>
       <header className="sm:flex">
