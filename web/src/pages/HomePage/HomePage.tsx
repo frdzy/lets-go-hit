@@ -1,5 +1,5 @@
-import { useAuth } from '@redwoodjs/auth';
 import { MetaTags } from '@redwoodjs/web';
+import { useAuth } from 'src/auth';
 import SchedulesCell from 'src/components/Schedule/SchedulesCell';
 
 const HomePage = () => {

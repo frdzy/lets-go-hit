@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { useEffect } from 'react';
 
-import { useAuth } from '@redwoodjs/auth';
 import {
   Form,
   Label,
@@ -14,6 +13,8 @@ import { Link, navigate, routes } from '@redwoodjs/router';
 import { MetaTags } from '@redwoodjs/web';
 import { toast, Toaster } from '@redwoodjs/web/toast';
 
+import { useAuth } from 'src/auth';
+
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth();
 
@@ -24,13 +25,16 @@ const SignupPage = () => {
   }, [isAuthenticated]);
 
   // focus on email box on page load
-  const usernameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    usernameRef.current?.focus();
+    emailRef.current?.focus();
   }, []);
 
   const onSubmit = async (data: Record<string, string>) => {
-    const response = await signUp({ ...data });
+    const response = await signUp({
+      username: data.email,
+      password: data.password,
+    });
 
     if (response.message) {
       toast(response.message);
@@ -58,17 +62,17 @@ const SignupPage = () => {
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
                   <Label
-                    name="username"
+                    name="email"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
                     Email
                   </Label>
                   <TextField
-                    name="username"
+                    name="email"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-                    ref={usernameRef}
+                    ref={emailRef}
                     validation={{
                       required: {
                         value: true,
@@ -76,7 +80,7 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="username" className="rw-field-error" />
+                  <FieldError name="email" className="rw-field-error" />
 
                   <Label
                     name="password"

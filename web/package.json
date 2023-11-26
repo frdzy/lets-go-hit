@@ -14,10 +14,11 @@
   },
   "dependencies": {
     "@redwoodjs/auth": "^6.4.0",
+    "@redwoodjs/auth-dbauth-web": "6.4.0",
     "@redwoodjs/forms": "^6.4.0",
     "@redwoodjs/router": "^6.4.0",
     "@redwoodjs/web": "^6.4.0",
-    "@simplewebauthn/browser": "^6.2.2",
+    "@simplewebauthn/browser": "^7",
     "humanize-string": "2.1.0",
     "luxon": "^3.2.1",
     "prop-types": "15.8.1",

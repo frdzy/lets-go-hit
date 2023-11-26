@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-import { useAuth } from '@redwoodjs/auth';
 import { Form, Label, TextField, Submit, FieldError } from '@redwoodjs/forms';
 import { navigate, routes } from '@redwoodjs/router';
 import { MetaTags } from '@redwoodjs/web';
 import { toast, Toaster } from '@redwoodjs/web/toast';
+
+import { useAuth } from 'src/auth';
 
 const ForgotPasswordPage = () => {
   const { isAuthenticated, forgotPassword } = useAuth();
@@ -15,13 +16,13 @@ const ForgotPasswordPage = () => {
     }
   }, [isAuthenticated]);
 
-  const usernameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    usernameRef?.current?.focus();
+    emailRef?.current?.focus();
   }, []);
 
-  const onSubmit = async (data: { username: string }) => {
-    const response = await forgotPassword(data.username);
+  const onSubmit = async (data: { email: string }) => {
+    const response = await forgotPassword(data.email);
 
     if (response.error) {
       toast.error(response.error);
@@ -55,23 +56,26 @@ const ForgotPasswordPage = () => {
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
                   <div className="text-left">
                     <Label
-                      name="username"
+                      name="email"
                       className="rw-label"
                       errorClassName="rw-label rw-label-error"
                     >
-                      Username
+                      Email
                     </Label>
                     <TextField
-                      name="username"
+                      name="email"
                       className="rw-input"
                       errorClassName="rw-input rw-input-error"
-                      ref={usernameRef}
+                      ref={emailRef}
                       validation={{
-                        required: true,
+                        required: {
+                          value: true,
+                          message: 'Email is required',
+                        },
                       }}
                     />
 
-                    <FieldError name="username" className="rw-field-error" />
+                    <FieldError name="email" className="rw-field-error" />
                   </div>
 
                   <div className="rw-button-group">

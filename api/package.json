@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@redwoodjs/api": "^6.4.0",
+    "@redwoodjs/auth-dbauth-api": "6.4.0",
     "@redwoodjs/graphql-server": "^6.4.0",
-    "@simplewebauthn/server": "^6.2.2"
+    "@simplewebauthn/server": "^7"
   }
 }

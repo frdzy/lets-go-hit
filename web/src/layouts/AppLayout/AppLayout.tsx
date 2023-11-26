@@ -1,4 +1,4 @@
-import { useAuth } from '@redwoodjs/auth';
+import { useAuth } from 'src/auth';
 import { NavLink, routes } from '@redwoodjs/router';
 
 type AppLayoutProps = {

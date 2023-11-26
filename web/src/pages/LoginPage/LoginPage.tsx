@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 
-import { useAuth } from '@redwoodjs/auth';
 import {
   Form,
   Label,
@@ -13,6 +12,8 @@ import {
 import { Link, navigate, routes } from '@redwoodjs/router';
 import { MetaTags } from '@redwoodjs/web';
 import { toast, Toaster } from '@redwoodjs/web/toast';
+
+import { useAuth } from 'src/auth';
 
 const WELCOME_MESSAGE = 'Welcome back!';
 const REDIRECT = routes.home();
@@ -44,10 +45,10 @@ const LoginPage = ({ type }) => {
     }
   }, [loading, isAuthenticated]);
 
-  // focus on the username field as soon as the page loads
-  const usernameRef = useRef();
+  // focus on the email field as soon as the page loads
+  const emailRef = useRef();
   useEffect(() => {
-    usernameRef.current && usernameRef.current.focus();
+    emailRef.current && emailRef.current.focus();
   }, []);
 
   const onSubmit = async (data) => {
@@ -56,7 +57,10 @@ const LoginPage = ({ type }) => {
     if (webAuthnSupported) {
       setShouldShowWebAuthn(true);
     }
-    const response = await logIn({ ...data });
+    const response = await logIn({
+      username: data.email,
+      password: data.password,
+    });
 
     if (response.message) {
       // auth details good, but user not logged in
@@ -82,9 +86,7 @@ const LoginPage = ({ type }) => {
       navigate(REDIRECT);
     } catch (e) {
       if (e.name === 'WebAuthnDeviceNotFoundError') {
-        toast.error(
-          'Device not found, log in with username/password to continue'
-        );
+        toast.error('Device not found, log in with Email/Password to continue');
         setShowWebAuthn(false);
       } else {
         toast.error(e.message);
@@ -123,7 +125,7 @@ const LoginPage = ({ type }) => {
 
   const RegisterWebAuthnPrompt = () => (
     <div className="rw-webauthn-wrapper">
-      <h2>No more passwords!</h2>
+      <h2>No more Passwords!</h2>
       <p>
         Depending on your device you can log in with your fingerprint, face or
         PIN next time.
@@ -142,27 +144,27 @@ const LoginPage = ({ type }) => {
   const PasswordForm = () => (
     <Form onSubmit={onSubmit} className="rw-form-wrapper">
       <Label
-        name="username"
+        name="email"
         className="rw-label"
         errorClassName="rw-label rw-label-error"
       >
-        Username
+        Email
       </Label>
       <TextField
-        name="username"
+        name="email"
         className="rw-input"
         errorClassName="rw-input rw-input-error"
-        ref={usernameRef}
+        ref={emailRef}
         autoFocus
         validation={{
           required: {
             value: true,
-            message: 'Username is required',
+            message: 'Email is required',
           },
         }}
       />
 
-      <FieldError name="username" className="rw-field-error" />
+      <FieldError name="email" className="rw-field-error" />
 
       <Label
         name="password"
@@ -217,7 +219,7 @@ const LoginPage = ({ type }) => {
           <div className="rw-login-link">
             <span>or login with </span>{' '}
             <a href="?type=password" className="rw-link">
-              username and password
+              email and password
             </a>
           </div>
         );
