@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@redwoodjs/auth-dbauth-setup": "6.6.0",
+    "@redwoodjs/cli-storybook": "6.6.0",
     "@redwoodjs/core": "6.6.0",
     "prettier-plugin-tailwindcss": "^0.2.1"
   },
@@ -24,8 +25,5 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.2.4",
-  "dependencies": {
-    "tailwindcss-classnames": "^3.1.0"
-  }
+  "packageManager": "yarn@3.2.4"
 }
