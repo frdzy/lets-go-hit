@@ -11,7 +11,8 @@ export const schema = gql`
   }
 
   type Query {
-    users: [User!]! @skipAuth
+    userCount: Int! @skipAuth
+    users: [User!]! @requireAuth
     user(id: ID!): User @requireAuth
   }
 
