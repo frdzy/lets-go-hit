@@ -30,11 +30,11 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <>
       <header className="sm:flex">
-        <h1 className="font-xl my-auto px-2 pt-2 text-xl">Let's Go Play 🎾</h1>
+        <h1 className="font-xl mx-2 my-2 text-xl">Let's Go Play 🎾</h1>
         <div className="grow" />
         {isAuthenticated && currentUser ? (
           <>
-            <span className="p-2">{currentUser.email}</span>
+            <div className="mx-2 my-2">{currentUser.email}</div>
             <button className={loginStyle} type="button" onClick={logOut}>
               Logout
             </button>
