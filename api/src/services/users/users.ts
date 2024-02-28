@@ -6,6 +6,10 @@ import type {
 
 import { db } from 'src/lib/db';
 
+export const userCount: QueryResolvers['userCount'] = () => {
+  return db.user.count();
+};
+
 export const users: QueryResolvers['users'] = () => {
   return db.user.findMany();
 };
