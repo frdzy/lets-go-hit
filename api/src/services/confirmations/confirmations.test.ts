@@ -52,7 +52,7 @@ describe('confirmations', () => {
     })) as Confirmation;
     const result = await updateConfirmation({
       id: original.id,
-      input: { playerId: scenario.confirmation.two.playerId },
+      input: { status: 'confirmed' },
     });
 
     expect(result.playerId).toEqual(scenario.confirmation.two.playerId);

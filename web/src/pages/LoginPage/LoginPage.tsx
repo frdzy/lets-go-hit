@@ -46,7 +46,7 @@ const LoginPage = ({ type }) => {
   }, [loading, isAuthenticated]);
 
   // focus on the email field as soon as the page loads
-  const emailRef = useRef();
+  const emailRef = useRef<HTMLInputElement | undefined>();
   useEffect(() => {
     emailRef.current && emailRef.current.focus();
   }, []);

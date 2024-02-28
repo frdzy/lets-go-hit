@@ -40,7 +40,7 @@ describe('schedules', () => {
     });
 
     expect(result.beginTimestamp).toEqual(new Date('2022-12-04T23:27:17.813Z'));
-    expect(result.createdByUserId).toEqual(
+    expect(result.createdByUser.id).toEqual(
       scenario.schedule.two.createdByUserId
     );
   });
