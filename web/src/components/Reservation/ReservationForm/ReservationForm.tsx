@@ -14,6 +14,8 @@ import type {
 } from 'types/graphql';
 import type { RWGqlError } from '@redwoodjs/forms';
 import { formatDatetime } from 'src/lib/formatters';
+import ReservationSelectCourtLocationCell from 'src/components/Reservation/ReservationSelectCourtLocationCell';
+import { useState } from 'react';
 
 type FormReservation = NonNullable<EditReservationById['reservation']>;
 
@@ -28,6 +30,9 @@ const ReservationForm = (props: ReservationFormProps) => {
   const onSubmit = (data: FormReservation) => {
     props.onSave(data, props?.reservation?.id);
   };
+  const [beginTimestamp, setBeginTimestamp] = useState(
+    props.reservation?.beginTimestamp
+  );
 
   return (
     <div className="rw-form-wrapper">
@@ -53,6 +58,9 @@ const ReservationForm = (props: ReservationFormProps) => {
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
+          onChange={(event) => {
+            setBeginTimestamp(event.target.value);
+          }}
         />
 
         <FieldError name="beginTimestamp" className="rw-field-error" />
@@ -67,7 +75,9 @@ const ReservationForm = (props: ReservationFormProps) => {
 
         <DatetimeLocalField
           name="endTimestamp"
-          defaultValue={formatDatetime(props.reservation?.endTimestamp)}
+          defaultValue={formatDatetime(
+            props.reservation?.endTimestamp ?? beginTimestamp
+          )}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
@@ -80,15 +90,12 @@ const ReservationForm = (props: ReservationFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Court location id
+          Court location
         </Label>
 
-        <TextField
+        <ReservationSelectCourtLocationCell
           name="courtLocationId"
           defaultValue={props.reservation?.courtLocationId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
         />
 
         <FieldError name="courtLocationId" className="rw-field-error" />

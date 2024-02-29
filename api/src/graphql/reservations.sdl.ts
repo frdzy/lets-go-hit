@@ -12,6 +12,7 @@ export const schema = gql`
 
   type Query {
     reservations: [Reservation!]! @requireAuth
+    openReservations(fromScheduleSearch: ID): [Reservation!]! @requireAuth
     reservation(id: ID!): Reservation @requireAuth
   }
 

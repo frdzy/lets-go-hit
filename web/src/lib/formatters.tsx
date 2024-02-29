@@ -1,3 +1,5 @@
+import { FindReservations } from 'types/graphql';
+
 import React from 'react';
 import { DateTime } from 'luxon';
 
@@ -56,13 +58,33 @@ export const jsonTruncate = (obj: unknown) => {
   return truncate(JSON.stringify(obj, null, 2));
 };
 
+export function formatShortDatetime(dateTime: string) {
+  return DateTime.fromISO(dateTime).toLocaleString(
+    DateTime.DATETIME_MED_WITH_WEEKDAY
+  );
+}
+
+export function getReferenceFromReservation(
+  reservation: FindReservations['reservations'][number] | undefined
+) {
+  if (!reservation) {
+    return undefined;
+  }
+  return {
+    id: reservation.id,
+    name: `${formatShortDatetime(reservation.beginTimestamp)} @ ${
+      reservation.courtLocation.name
+    }`,
+  };
+}
+
 export const timeTag = (dateTime?: string) => {
   let output: string | JSX.Element = '';
 
   if (dateTime) {
     output = (
       <time dateTime={dateTime} title={dateTime}>
-        {DateTime.fromISO(dateTime).toLocaleString(DateTime.DATETIME_MED_WITH_WEEKDAY)}
+        {formatShortDatetime(dateTime)}
       </time>
     );
   }
