@@ -24,12 +24,15 @@ export const Loading = () => <div>Loading...</div>;
 
 export const Empty = () => {
   return (
-    <div className="rw-text-center">
-      {'No courtLocations yet. '}
-      <Link to={routes.newCourtLocation()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
+    <>
+      <CourtLocations courtLocations={[]} />;
+      <div className="rw-text-center">
+        {'No courtLocations yet. '}
+        <Link to={routes.newCourtLocation()} className="rw-link">
+          {'Create one?'}
+        </Link>
+      </div>
+    </>
   );
 };
 
