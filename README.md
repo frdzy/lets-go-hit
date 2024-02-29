@@ -15,6 +15,7 @@ TODOs:
 - [x] Add dbAuth
 - [x] Switch to postgresql since that looks like the cheapest time and money cost option for production
 - [x] Deploy to [Render](https://render.com/docs/deploy-redwood)
+  - [x] Replaced by [Netlify](https://redwoodjs.com/docs/deploy/netlify)
 - [x] Recreate necessary frontend forms to properly utilize authentication
 - [x] Limit reservations and schedules to participants only
 - [x] Add underline of current section
@@ -26,6 +27,3 @@ TODOs:
 - [ ] "Attach" feature to search for a Reference
 - [ ] On narrow viewports (e.g. vertical phone screen), improve table-of-objects UI
 
-Later:
-
-- [ ] Switch auth with [Clerk](https://clerk.dev/tutorials/redwoodjs-blog-tutorial-with-clerk)

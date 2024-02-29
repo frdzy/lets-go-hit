@@ -25,16 +25,15 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   const loginStyle = 'mx-2 my-auto max-w-xs rounded-xl bg-slate-50 p-2';
   return (
     <>
-      <header className="sm:flex">
+      <header className="justify-between sm:flex">
         <h1 className="font-xl mx-2 my-2 text-xl">Let's Go Play 🎾</h1>
-        <div className="grow" />
         {isAuthenticated && currentUser ? (
-          <>
+          <div className="flex-column flex">
             <div className="mx-2 my-2">{currentUser.email}</div>
             <button className={loginStyle} type="button" onClick={logOut}>
               Logout
             </button>
-          </>
+          </div>
         ) : (
           <NavLink
             className={loginStyle}
