@@ -19,6 +19,29 @@ export const reservations: QueryResolvers['reservations'] = async () => {
   });
 };
 
+export const openReservations: QueryResolvers['reservations'] = async ({
+  fromScheduleSearch,
+}) => {
+  const currentUser = getRequiredCurrentUser();
+  const results = await db.reservation.findMany({
+    where: {
+      byUserId: currentUser.id,
+    },
+    orderBy: {
+      beginTimestamp: 'desc',
+    },
+    include: {
+      schedules: true,
+    },
+  });
+  return results.filter((r) => {
+    return (
+      r.schedules.length === 0 ||
+      r.schedules.find((schedule) => schedule.id === fromScheduleSearch)
+    );
+  });
+};
+
 export const reservation: QueryResolvers['reservation'] = ({ id }) => {
   return db.reservation.findUnique({
     where: { id },

@@ -6,7 +6,7 @@ import { Details } from 'src/components/Details';
 import { Reference } from 'src/components/Reference';
 
 import { QUERY } from 'src/components/Schedule/SchedulesCell';
-import { timeTag, truncate } from 'src/lib/formatters';
+import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
 
 import type {
   DeleteScheduleMutationVariables,
@@ -68,7 +68,9 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
               </td>
               <td>
                 <Reference
-                  referenceTarget={schedule.reservation}
+                  referenceTarget={getReferenceFromReservation(
+                    schedule.reservation
+                  )}
                   routeToCreate={routes.newReservation}
                   routeToDetails={(id) => routes.reservation({ id: id })}
                 />

@@ -12,6 +12,16 @@ export const QUERY = gql`
       beginTimestamp
       reservation {
         id
+        beginTimestamp
+        endTimestamp
+        courtLocation {
+          id
+          name
+        }
+        byUser {
+          id
+          name
+        }
       }
       createdByUser {
         id

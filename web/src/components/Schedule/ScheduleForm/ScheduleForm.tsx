@@ -4,13 +4,14 @@ import {
   FieldError,
   Label,
   DatetimeLocalField,
-  TextField,
   Submit,
 } from '@redwoodjs/forms';
 
 import type { EditScheduleById, UpdateScheduleInput } from 'types/graphql';
 import type { RWGqlError } from '@redwoodjs/forms';
 import { formatDatetime } from 'src/lib/formatters';
+
+import ScheduleSelectReservationFieldCell from 'src/components/Schedule/ScheduleSelectReservationFieldCell';
 
 type FormSchedule = NonNullable<EditScheduleById['schedule']>;
 
@@ -59,14 +60,13 @@ const ScheduleForm = (props: ScheduleFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Reservation id
+          Reservation
         </Label>
 
-        <TextField
+        <ScheduleSelectReservationFieldCell
           name="reservationId"
+          fromScheduleSearch={props.schedule?.id}
           defaultValue={props.schedule?.reservation?.id}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
         />
 
         <FieldError name="reservationId" className="rw-field-error" />

@@ -4,7 +4,7 @@ import { toast } from '@redwoodjs/web/toast';
 import { CreatorReference } from 'src/components/CreatorReference';
 import { Reference } from 'src/components/Reference';
 
-import { timeTag } from 'src/lib/formatters';
+import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
 
 import type {
   DeleteScheduleMutationVariables,
@@ -27,7 +27,7 @@ const Schedule = ({ schedule }: Props) => {
   const [deleteSchedule] = useMutation(DELETE_SCHEDULE_MUTATION, {
     onCompleted: () => {
       toast.success('Schedule deleted');
-      navigate(routes.schedules());
+      navigate(routes.home());
     },
     onError: (error) => {
       toast.error(error.message);
@@ -62,7 +62,9 @@ const Schedule = ({ schedule }: Props) => {
               <th>Reservation</th>
               <td>
                 <Reference
-                  referenceTarget={schedule.reservation}
+                  referenceTarget={getReferenceFromReservation(
+                    schedule.reservation
+                  )}
                   routeToCreate={routes.newReservation}
                   routeToDetails={(id) => routes.reservation({ id: id })}
                 />
