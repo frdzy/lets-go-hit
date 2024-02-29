@@ -29,14 +29,7 @@ export const QUERY = gql`
 export const Loading = () => <div>Loading...</div>;
 
 export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No schedules yet. '}
-      <Link to={routes.newSchedule()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  );
+  return <Schedules schedules={[]} />;
 };
 
 export const Failure = ({ error }: CellFailureProps) => (

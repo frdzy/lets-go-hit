@@ -20,7 +20,7 @@ const NewSchedule = () => {
     {
       onCompleted: () => {
         toast.success('Schedule created');
-        navigate(routes.schedules());
+        navigate(routes.home());
       },
       onError: (error) => {
         toast.error(error.message);

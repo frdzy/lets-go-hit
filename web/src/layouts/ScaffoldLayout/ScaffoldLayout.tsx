@@ -21,13 +21,12 @@ const ScaffoldLayout = ({
     <AppLayout>
       <div className="rw-scaffold container mx-auto my-12">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <header className="sm:flex">
-          <h2 className="rw-heading rw-heading-primary my-2">
-            <Link to={routes[titleTo]()} className="rw-link">
+        <header className="justify-between sm:flex">
+          <h2 className="rw-heading rw-heading-primary">
+            <Link to={routes[titleTo]()} className="rw-link m-2">
               {title}
             </Link>
           </h2>
-          <div className="grow" />
           <Link to={routes[buttonTo]()} className="rw-button rw-button-green">
             <div className="rw-button-icon">+</div> {buttonLabel}
           </Link>

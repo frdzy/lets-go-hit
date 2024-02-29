@@ -13,10 +13,6 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       label: 'Home',
     },
     {
-      to: routes.schedules(),
-      label: 'Schedules',
-    },
-    {
       to: routes.reservations(),
       label: 'Reservations',
     },
@@ -61,7 +57,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           </NavLink>
         ))}
       </nav>
-      <main className="rw-main my-2 px-2 sm:px-8">{children}</main>
+      <main className="rw-main my-2 mx-2 sm:px-8">{children}</main>
     </>
   );
 };

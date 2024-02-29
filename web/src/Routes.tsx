@@ -21,7 +21,7 @@ const Routes = () => {
         <Set
           wrap={ScaffoldLayout}
           title="Schedules"
-          titleTo="schedules"
+          titleTo="home"
           buttonLabel="New Schedule"
           buttonTo="newSchedule"
         >
@@ -39,11 +39,6 @@ const Routes = () => {
             path="/schedules/{id}"
             page={ScheduleSchedulePage}
             name="schedule"
-          />
-          <Route
-            path="/schedules"
-            page={ScheduleSchedulesPage}
-            name="schedules"
           />
         </Set>
         <Set
@@ -108,8 +103,16 @@ const Routes = () => {
           />
         </Set>
       </Private>
-      <Set wrap={AppLayout}>
+      <Set
+        wrap={ScaffoldLayout}
+        title="Schedules"
+        titleTo="home"
+        buttonLabel="New Schedule"
+        buttonTo="newSchedule"
+      >
         <Route path="/" page={HomePage} name="home" />
+      </Set>
+      <Set wrap={AppLayout}>
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route
