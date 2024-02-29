@@ -45,7 +45,7 @@ export const Success = ({ schedule }: CellSuccessProps<EditScheduleById>) => {
     {
       onCompleted: () => {
         toast.success('Schedule updated');
-        navigate(routes.schedules());
+        navigate(routes.home());
       },
       onError: (error) => {
         toast.error(error.message);
