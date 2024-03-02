@@ -32,6 +32,7 @@ const SignupPage = () => {
 
   const onSubmit = async (data: Record<string, string>) => {
     const response = await signUp({
+      name: data.name,
       username: data.email,
       password: data.password,
     });
@@ -61,6 +62,26 @@ const SignupPage = () => {
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                  <Label
+                    name="name"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Name
+                  </Label>
+                  <TextField
+                    name="name"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Name is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="name" className="rw-field-error" />
+
                   <Label
                     name="email"
                     className="rw-label"

@@ -19,11 +19,23 @@ export const reservations: QueryResolvers['reservations'] = async () => {
   });
 };
 
-export const openReservations: QueryResolvers['reservations'] = async ({
+export const openReservations: QueryResolvers['openReservations'] = async ({
   fromScheduleSearch,
 }) => {
+  const results = [];
+  if (fromScheduleSearch) {
+    const fromSchedule = await db.schedule.findFirstOrThrow({
+      where: {
+        id: fromScheduleSearch,
+      },
+      include: { reservation: true },
+    });
+    if (fromSchedule.reservation) {
+      results.push(fromSchedule.reservation);
+    }
+  }
   const currentUser = getRequiredCurrentUser();
-  const results = await db.reservation.findMany({
+  const fromUser = await db.reservation.findMany({
     where: {
       byUserId: currentUser.id,
     },
@@ -34,12 +46,11 @@ export const openReservations: QueryResolvers['reservations'] = async ({
       schedules: true,
     },
   });
-  return results.filter((r) => {
-    return (
-      r.schedules.length === 0 ||
-      r.schedules.find((schedule) => schedule.id === fromScheduleSearch)
-    );
-  });
+  return results.concat(
+    fromUser.filter((r) => {
+      return r.schedules.length === 0;
+    })
+  );
 };
 
 export const reservation: QueryResolvers['reservation'] = ({ id }) => {

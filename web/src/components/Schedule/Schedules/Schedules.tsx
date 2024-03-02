@@ -49,7 +49,7 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
           <tr>
             <th>Name</th>
             <th>Reservation</th>
-            <th>Created by user</th>
+            <th>Confirmations</th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +76,12 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
                 />
               </td>
               <td>
-                <CreatorReference referenceTarget={schedule.createdByUser} />
+                {schedule.confirmations.map((confirmation) => (
+                  <div key={confirmation.id}>
+                    <span>{confirmation.player.name ?? 'Unnamed'}</span>{' '}
+                    <span>({confirmation.status ?? 'invited'})</span>
+                  </div>
+                ))}
               </td>
             </tr>
           ))}

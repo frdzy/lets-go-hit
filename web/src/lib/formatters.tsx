@@ -1,4 +1,4 @@
-import { FindReservations } from 'types/graphql';
+import { FindReservationById, FindReservations } from 'types/graphql';
 
 import React from 'react';
 import { DateTime } from 'luxon';
@@ -65,7 +65,12 @@ export function formatShortDatetime(dateTime: string) {
 }
 
 export function getReferenceFromReservation(
-  reservation: FindReservations['reservations'][number] | undefined
+  reservation:
+    | Pick<
+        FindReservationById['reservation'],
+        'id' | 'beginTimestamp' | 'courtLocation'
+      >
+    | undefined
 ) {
   if (!reservation) {
     return undefined;

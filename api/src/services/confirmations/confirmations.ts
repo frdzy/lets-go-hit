@@ -2,6 +2,7 @@ import type {
   QueryResolvers,
   MutationResolvers,
   ConfirmationRelationResolvers,
+  ConfirmationStatus,
 } from 'types/graphql';
 
 import { db } from 'src/lib/db';
@@ -50,5 +51,8 @@ export const Confirmation: ConfirmationRelationResolvers = {
   },
   schedule: (_obj, { root }) => {
     return db.confirmation.findUnique({ where: { id: root?.id } }).schedule();
+  },
+  status: (_obj, { root }) => {
+    return root.status === 'confirmed' ? root.status : 'invited';
   },
 };

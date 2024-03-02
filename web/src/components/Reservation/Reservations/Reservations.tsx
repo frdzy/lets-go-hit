@@ -1,7 +1,6 @@
-import { Link, routes } from '@redwoodjs/router';
+import { routes } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
-import { CreatorReference } from 'src/components/CreatorReference';
 import { Details } from 'src/components/Details';
 import { Reference } from 'src/components/Reference';
 
@@ -51,7 +50,6 @@ const ReservationsList = ({ reservations }: FindReservations) => {
             <th>Begin timestamp</th>
             <th>End timestamp</th>
             <th>Court location</th>
-            <th>By user</th>
           </tr>
         </thead>
         <tbody>
@@ -72,9 +70,6 @@ const ReservationsList = ({ reservations }: FindReservations) => {
                   referenceTarget={reservation.courtLocation}
                   routeToDetails={(id) => routes.courtLocation({ id })}
                 />
-              </td>
-              <td>
-                <CreatorReference referenceTarget={reservation.byUser} />
               </td>
             </tr>
           ))}

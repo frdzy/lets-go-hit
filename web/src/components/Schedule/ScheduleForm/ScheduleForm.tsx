@@ -12,6 +12,7 @@ import type { RWGqlError } from '@redwoodjs/forms';
 import { formatDatetime } from 'src/lib/formatters';
 
 import ScheduleSelectReservationFieldCell from 'src/components/Schedule/ScheduleSelectReservationFieldCell';
+import { useAuth } from 'src/auth';
 
 type FormSchedule = NonNullable<EditScheduleById['schedule']>;
 
@@ -23,6 +24,7 @@ interface ScheduleFormProps {
 }
 
 const ScheduleForm = (props: ScheduleFormProps) => {
+  const { currentUser } = useAuth();
   const onSubmit = (data: FormSchedule) => {
     props.onSave(data, props?.schedule?.id);
   };
@@ -70,6 +72,32 @@ const ScheduleForm = (props: ScheduleFormProps) => {
         />
 
         <FieldError name="reservationId" className="rw-field-error" />
+
+        <Label
+          name="confirmations"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Confirmations
+        </Label>
+
+        <div className="rw-input">
+          {props.schedule.confirmations.map((confirmation) => (
+            <div key={confirmation.id}>
+              <span>
+                {(confirmation.player.name ?? 'Unnamed') +
+                  (confirmation.player.id === currentUser.id ? ' (you)' : '')}
+              </span>{' '}
+              <span>({confirmation.status ?? 'invited'})</span>
+            </div>
+          ))}
+          {props.schedule.createdByUser.id === currentUser.id && (
+            <div className="rw-button">Invite</div>
+          )}
+          {props.schedule.confirmations.some(
+            (c) => c.player.id === currentUser.id && c.status === 'invited'
+          ) && <div className="rw-button">Confirm</div>}
+        </div>
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

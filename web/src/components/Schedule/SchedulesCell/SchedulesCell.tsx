@@ -29,7 +29,10 @@ export const QUERY = gql`
       }
       confirmations {
         id
-        playerId
+        player {
+          id
+          name
+        }
         status
       }
     }

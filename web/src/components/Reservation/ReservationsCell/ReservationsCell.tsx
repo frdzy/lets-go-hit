@@ -28,7 +28,7 @@ export const Loading = () => <div>Loading...</div>;
 export const Empty = () => {
   return (
     <>
-      return <Reservations reservations={[]} />;
+      <Reservations reservations={[]} />
       <div className="rw-text-center">
         {'No reservations yet. '}
         <Link to={routes.newReservation()} className="rw-link">
