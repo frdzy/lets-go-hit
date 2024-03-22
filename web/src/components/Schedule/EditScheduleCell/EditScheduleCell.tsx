@@ -18,6 +18,14 @@ export const QUERY = gql`
       createdByUser {
         id
       }
+      confirmations {
+        id
+        player {
+          id
+          name
+        }
+        status
+      }
     }
   }
 `;
