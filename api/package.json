@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@prisma/client": "^5.22.0",
     "@redwoodjs/api": "8.4.0",
     "@redwoodjs/auth-dbauth-api": "8.4.0",
     "@redwoodjs/graphql-server": "8.4.0",
-    "@simplewebauthn/server": "^7"
+    "@simplewebauthn/server": "^7",
+    "prisma": "^5.22.0"
   }
 }
