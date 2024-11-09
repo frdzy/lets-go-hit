@@ -25,7 +25,7 @@ export const Loading = () => <div>Loading...</div>;
 export const Empty = () => {
   return (
     <>
-      <CourtLocations courtLocations={[]} />;
+      <CourtLocations courtLocations={[]} />
       <div className="rw-text-center">
         {'No courtLocations yet. '}
         <Link to={routes.newCourtLocation()} className="rw-link">
