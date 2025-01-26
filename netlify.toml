@@ -19,3 +19,6 @@ functions = "api/dist/functions"
   from = "/*"
   to = "/200.html"
   status = 200
+
+[functions]
+  external_node_modules = ["@simplewebauthn/server"]
