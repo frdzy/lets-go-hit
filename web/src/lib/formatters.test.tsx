@@ -18,7 +18,7 @@ describe('formatEnum', () => {
 
   it('formats a list of values', () => {
     expect(
-      formatEnum(['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'VIOLET'])
+      formatEnum(['RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'VIOLET']),
     ).toEqual('Red, Orange, Yellow, Green, Blue, Violet');
   });
 
@@ -76,7 +76,7 @@ describe('jsonTruncate', () => {
         },
         five: 5,
         bool: false,
-      })
+      }),
     ).toMatch(/.+\n.+\w\.\.\.$/s);
   });
 });
@@ -121,7 +121,7 @@ describe('jsonDisplay', () => {
             role: 'backend',
           },
         },
-      })
+      }),
     ).toMatchInlineSnapshot(`
       <pre>
         <code>

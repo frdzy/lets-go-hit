@@ -1,10 +1,10 @@
+import type { CreateReservationInput } from 'types/graphql';
+
 import { navigate, routes } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
 
 import ReservationForm from 'src/components/Reservation/ReservationForm';
-
-import type { CreateReservationInput } from 'types/graphql';
 
 const CREATE_RESERVATION_MUTATION = gql`
   mutation CreateReservationMutation($input: CreateReservationInput!) {
@@ -25,7 +25,7 @@ const NewReservation = () => {
       onError: (error) => {
         toast.error(error.message);
       },
-    }
+    },
   );
 
   const onSave = (input: CreateReservationInput) => {

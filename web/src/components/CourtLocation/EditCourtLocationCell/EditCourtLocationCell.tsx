@@ -55,12 +55,12 @@ export const Success = ({
       onError: (error) => {
         toast.error(error.message);
       },
-    }
+    },
   );
 
   const onSave = (
     input: UpdateCourtLocationInput,
-    id: EditCourtLocationById['courtLocation']['id']
+    id: EditCourtLocationById['courtLocation']['id'],
   ) => {
     updateCourtLocation({ variables: { id, input } });
   };

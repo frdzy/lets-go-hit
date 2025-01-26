@@ -1,4 +1,5 @@
 import { MetaTags } from '@redwoodjs/web';
+
 import CourtLocationsCell from 'src/components/CourtLocation/CourtLocationsCell';
 
 const CourtLocationsPage = () => {

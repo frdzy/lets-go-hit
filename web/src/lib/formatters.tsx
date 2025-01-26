@@ -1,9 +1,8 @@
-import { FindReservationById, FindReservations } from 'types/graphql';
-
 import React from 'react';
-import { DateTime } from 'luxon';
 
 import humanize from 'humanize-string';
+import { DateTime } from 'luxon';
+import { FindReservationById } from 'types/graphql';
 
 const MAX_STRING_LENGTH = 150;
 
@@ -60,7 +59,7 @@ export const jsonTruncate = (obj: unknown) => {
 
 export function formatShortDatetime(dateTime: string) {
   return DateTime.fromISO(dateTime).toLocaleString(
-    DateTime.DATETIME_MED_WITH_WEEKDAY
+    DateTime.DATETIME_MED_WITH_WEEKDAY,
   );
 }
 
@@ -70,7 +69,7 @@ export function getReferenceFromReservation(
         FindReservationById['reservation'],
         'id' | 'beginTimestamp' | 'courtLocation'
       >
-    | undefined
+    | undefined,
 ) {
   if (!reservation) {
     return undefined;

@@ -28,7 +28,7 @@ describe('confirmations', () => {
       const result = await confirmation({ id: scenario.confirmation.one.id });
 
       expect(result).toEqual(scenario.confirmation.one);
-    }
+    },
   );
 
   scenario('creates a confirmation', async (scenario: StandardScenario) => {

@@ -1,10 +1,10 @@
+import type { CreateScheduleInput } from 'types/graphql';
+
 import { navigate, routes } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
 
 import ScheduleForm from 'src/components/Schedule/ScheduleForm';
-
-import type { CreateScheduleInput } from 'types/graphql';
 
 const CREATE_SCHEDULE_MUTATION = gql`
   mutation CreateScheduleMutation($input: CreateScheduleInput!) {
@@ -25,7 +25,7 @@ const NewSchedule = () => {
       onError: (error) => {
         toast.error(error.message);
       },
-    }
+    },
   );
 
   const onSave = (input: CreateScheduleInput) => {

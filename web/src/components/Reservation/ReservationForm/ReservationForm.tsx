@@ -1,21 +1,22 @@
+import { useState } from 'react';
+
+import type {
+  EditReservationById,
+  UpdateReservationInput,
+} from 'types/graphql';
+
 import {
   Form,
   FormError,
   FieldError,
   Label,
   DatetimeLocalField,
-  TextField,
   Submit,
 } from '@redwoodjs/forms';
-
-import type {
-  EditReservationById,
-  UpdateReservationInput,
-} from 'types/graphql';
 import type { RWGqlError } from '@redwoodjs/forms';
-import { formatDatetime } from 'src/lib/formatters';
+
 import ReservationSelectCourtLocationCell from 'src/components/Reservation/ReservationSelectCourtLocationCell';
-import { useState } from 'react';
+import { formatDatetime } from 'src/lib/formatters';
 
 type FormReservation = NonNullable<EditReservationById['reservation']>;
 
@@ -31,7 +32,7 @@ const ReservationForm = (props: ReservationFormProps) => {
     props.onSave(data, props?.reservation?.id);
   };
   const [beginTimestamp, setBeginTimestamp] = useState(
-    props.reservation?.beginTimestamp
+    props.reservation?.beginTimestamp,
   );
 
   return (
@@ -76,7 +77,7 @@ const ReservationForm = (props: ReservationFormProps) => {
         <DatetimeLocalField
           name="endTimestamp"
           defaultValue={formatDatetime(
-            props.reservation?.endTimestamp ?? beginTimestamp
+            props.reservation?.endTimestamp ?? beginTimestamp,
           )}
           className="rw-input"
           errorClassName="rw-input rw-input-error"

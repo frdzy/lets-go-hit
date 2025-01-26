@@ -1,4 +1,9 @@
-import { Link, routes } from '@redwoodjs/router';
+import type {
+  DeleteCourtLocationMutationVariables,
+  FindCourtLocations,
+} from 'types/graphql';
+
+import { routes } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
 
@@ -6,11 +11,6 @@ import { QUERY } from 'src/components/CourtLocation/CourtLocationsCell';
 import { CreatorReference } from 'src/components/CreatorReference';
 import { Details } from 'src/components/Details';
 import { truncate } from 'src/lib/formatters';
-
-import type {
-  DeleteCourtLocationMutationVariables,
-  FindCourtLocations,
-} from 'types/graphql';
 
 const DELETE_COURT_LOCATION_MUTATION = gql`
   mutation DeleteCourtLocationMutation($id: String!) {

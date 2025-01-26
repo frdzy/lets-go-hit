@@ -58,12 +58,12 @@ export const Success = ({ schedule }: CellSuccessProps<EditScheduleById>) => {
       onError: (error) => {
         toast.error(error.message);
       },
-    }
+    },
   );
 
   const onSave = (
     input: UpdateScheduleInput,
-    id: EditScheduleById['schedule']['id']
+    id: EditScheduleById['schedule']['id'],
   ) => {
     updateSchedule({ variables: { id, input } });
   };

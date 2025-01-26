@@ -1,3 +1,8 @@
+import type {
+  EditCourtLocationById,
+  UpdateCourtLocationInput,
+} from 'types/graphql';
+
 import {
   Form,
   FormError,
@@ -6,11 +11,6 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms';
-
-import type {
-  EditCourtLocationById,
-  UpdateCourtLocationInput,
-} from 'types/graphql';
 import type { RWGqlError } from '@redwoodjs/forms';
 
 type FormCourtLocation = NonNullable<EditCourtLocationById['courtLocation']>;
@@ -19,7 +19,7 @@ interface CourtLocationFormProps {
   courtLocation?: EditCourtLocationById['courtLocation'];
   onSave: (
     data: UpdateCourtLocationInput,
-    id?: FormCourtLocation['id']
+    id?: FormCourtLocation['id'],
   ) => void;
   error: RWGqlError;
   loading: boolean;

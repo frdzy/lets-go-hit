@@ -28,7 +28,7 @@ describe('reservations', () => {
       const result = await reservation({ id: scenario.reservation.one.id });
 
       expect(result).toEqual(scenario.reservation.one);
-    }
+    },
   );
 
   scenario('creates a reservation', async (scenario: StandardScenario) => {
@@ -47,7 +47,7 @@ describe('reservations', () => {
     expect(result.beginTimestamp).toEqual(new Date('2022-12-04T23:41:24.663Z'));
     expect(result.endTimestamp).toEqual(new Date('2022-12-04T23:41:24.663Z'));
     expect(result.courtLocationId).toEqual(
-      scenario.reservation.two.courtLocationId
+      scenario.reservation.two.courtLocationId,
     );
     expect(result.byUserId).toEqual(scenario.reservation.two.byUserId);
   });

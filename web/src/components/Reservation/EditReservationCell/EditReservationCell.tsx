@@ -55,12 +55,12 @@ export const Success = ({
       onError: (error) => {
         toast.error(error.message);
       },
-    }
+    },
   );
 
   const onSave = (
     input: UpdateReservationInput,
-    id: EditReservationById['reservation']['id']
+    id: EditReservationById['reservation']['id'],
   ) => {
     updateReservation({ variables: { id, input } });
   };

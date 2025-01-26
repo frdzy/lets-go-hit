@@ -1,17 +1,16 @@
-import { Link, routes } from '@redwoodjs/router';
-import { useMutation } from '@redwoodjs/web';
-import { toast } from '@redwoodjs/web/toast';
-import { CreatorReference } from 'src/components/CreatorReference';
-import { Details } from 'src/components/Details';
-import { Reference } from 'src/components/Reference';
-
-import { QUERY } from 'src/components/Schedule/SchedulesCell';
-import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
-
 import type {
   DeleteScheduleMutationVariables,
   FindSchedules,
 } from 'types/graphql';
+
+import { routes } from '@redwoodjs/router';
+import { useMutation } from '@redwoodjs/web';
+import { toast } from '@redwoodjs/web/toast';
+
+import { Details } from 'src/components/Details';
+import { Reference } from 'src/components/Reference';
+import { QUERY } from 'src/components/Schedule/SchedulesCell';
+import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
 
 const DELETE_SCHEDULE_MUTATION = gql`
   mutation DeleteScheduleMutation($id: ID!) {
@@ -69,7 +68,7 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
               <td>
                 <Reference
                   referenceTarget={getReferenceFromReservation(
-                    schedule.reservation
+                    schedule.reservation,
                   )}
                   routeToCreate={routes.newReservation}
                   routeToDetails={(id) => routes.reservation({ id: id })}

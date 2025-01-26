@@ -1,16 +1,16 @@
-import { routes } from '@redwoodjs/router';
-import { useMutation } from '@redwoodjs/web';
-import { toast } from '@redwoodjs/web/toast';
-import { Details } from 'src/components/Details';
-import { Reference } from 'src/components/Reference';
-
-import { QUERY } from 'src/components/Reservation/ReservationsCell';
-import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
-
 import type {
   DeleteReservationMutationVariables,
   FindReservations,
 } from 'types/graphql';
+
+import { routes } from '@redwoodjs/router';
+import { useMutation } from '@redwoodjs/web';
+import { toast } from '@redwoodjs/web/toast';
+
+import { Details } from 'src/components/Details';
+import { Reference } from 'src/components/Reference';
+import { QUERY } from 'src/components/Reservation/ReservationsCell';
+import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
 
 const DELETE_RESERVATION_MUTATION = gql`
   mutation DeleteReservationMutation($id: ID!) {
