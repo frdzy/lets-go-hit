@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useEffect } from 'react';
 
 import {
@@ -28,7 +28,7 @@ const LoginPage = ({ type }) => {
   } = useAuth();
   const [shouldShowWebAuthn, setShouldShowWebAuthn] = useState(false);
   const [showWebAuthn, setShowWebAuthn] = useState(
-    webAuthn.isEnabled() && type !== 'password'
+    webAuthn.isEnabled() && type !== 'password',
   );
 
   // should redirect right after login or wait to show the webAuthn prompts?
@@ -36,19 +36,14 @@ const LoginPage = ({ type }) => {
     if (isAuthenticated && (!shouldShowWebAuthn || webAuthn.isEnabled())) {
       navigate(REDIRECT);
     }
-  }, [isAuthenticated, shouldShowWebAuthn]);
-
-  // if WebAuthn is enabled, show the prompt as soon as the page loads
-  useEffect(() => {
-    if (!loading && !isAuthenticated && showWebAuthn) {
-      onAuthenticate();
-    }
-  }, [loading, isAuthenticated]);
+  }, [isAuthenticated, shouldShowWebAuthn, webAuthn]);
 
   // focus on the email field as soon as the page loads
   const emailRef = useRef<HTMLInputElement | undefined>();
   useEffect(() => {
-    emailRef.current && emailRef.current.focus();
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
   }, []);
 
   const onSubmit = async (data) => {
@@ -78,7 +73,7 @@ const LoginPage = ({ type }) => {
     }
   };
 
-  const onAuthenticate = async () => {
+  const onAuthenticate = useCallback(async () => {
     try {
       await webAuthn.authenticate();
       await reauthenticate();
@@ -92,7 +87,7 @@ const LoginPage = ({ type }) => {
         toast.error(e.message);
       }
     }
-  };
+  }, [reauthenticate, webAuthn]);
 
   const onRegister = async () => {
     try {
@@ -155,7 +150,6 @@ const LoginPage = ({ type }) => {
         className="rw-input"
         errorClassName="rw-input rw-input-error"
         ref={emailRef}
-        autoFocus
         validation={{
           required: {
             value: true,

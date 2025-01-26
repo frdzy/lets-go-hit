@@ -49,7 +49,7 @@ export const openReservations: QueryResolvers['openReservations'] = async ({
   return results.concat(
     fromUser.filter((r) => {
       return r.schedules.length === 0;
-    })
+    }),
   );
 };
 

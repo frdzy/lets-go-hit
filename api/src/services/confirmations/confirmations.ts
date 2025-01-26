@@ -2,7 +2,6 @@ import type {
   QueryResolvers,
   MutationResolvers,
   ConfirmationRelationResolvers,
-  ConfirmationStatus,
 } from 'types/graphql';
 
 import { db } from 'src/lib/db';

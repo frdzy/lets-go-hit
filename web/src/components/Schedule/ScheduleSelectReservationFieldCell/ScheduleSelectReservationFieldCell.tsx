@@ -1,7 +1,9 @@
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
-import { ReferenceTypeaheadSearchFormField } from 'src/components/ReferenceTypeaheadSearchFormField';
 import { FindReservations } from 'types/graphql';
+
 import { routes } from '@redwoodjs/router';
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
+
+import { ReferenceTypeaheadSearchFormField } from 'src/components/ReferenceTypeaheadSearchFormField';
 import { getReferenceFromReservation } from 'src/lib/formatters';
 
 export const QUERY = gql`

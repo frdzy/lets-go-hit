@@ -1,10 +1,10 @@
+import type { CreateCourtLocationInput } from 'types/graphql';
+
 import { navigate, routes } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
 
 import CourtLocationForm from 'src/components/CourtLocation/CourtLocationForm';
-
-import type { CreateCourtLocationInput } from 'types/graphql';
 
 const CREATE_COURT_LOCATION_MUTATION = gql`
   mutation CreateCourtLocationMutation($input: CreateCourtLocationInput!) {
@@ -25,7 +25,7 @@ const NewCourtLocation = () => {
       onError: (error) => {
         toast.error(error.message);
       },
-    }
+    },
   );
 
   const onSave = (input: CreateCourtLocationInput) => {

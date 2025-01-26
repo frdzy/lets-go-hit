@@ -1,5 +1,6 @@
-import { useAuth } from 'src/auth';
 import { NavLink, routes } from '@redwoodjs/router';
+
+import { useAuth } from 'src/auth';
 
 type AppLayoutProps = {
   children?: React.ReactNode;
@@ -26,7 +27,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <>
       <header className="justify-between sm:flex">
-        <h1 className="font-xl mx-2 my-2 text-xl">Let's Go Play 🎾</h1>
+        <h1 className="font-xl mx-2 my-2 text-xl">Let{"'"}s Go Play 🎾</h1>
         {isAuthenticated && currentUser ? (
           <div className="flex-column flex">
             <div className="mx-2 my-2">{currentUser.email}</div>

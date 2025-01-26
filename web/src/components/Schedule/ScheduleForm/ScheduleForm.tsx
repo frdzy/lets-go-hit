@@ -1,3 +1,5 @@
+import type { EditScheduleById, UpdateScheduleInput } from 'types/graphql';
+
 import {
   Form,
   FormError,
@@ -6,13 +8,11 @@ import {
   DatetimeLocalField,
   Submit,
 } from '@redwoodjs/forms';
-
-import type { EditScheduleById, UpdateScheduleInput } from 'types/graphql';
 import type { RWGqlError } from '@redwoodjs/forms';
-import { formatDatetime } from 'src/lib/formatters';
 
-import ScheduleSelectReservationFieldCell from 'src/components/Schedule/ScheduleSelectReservationFieldCell';
 import { useAuth } from 'src/auth';
+import ScheduleSelectReservationFieldCell from 'src/components/Schedule/ScheduleSelectReservationFieldCell';
+import { formatDatetime } from 'src/lib/formatters';
 
 type FormSchedule = NonNullable<EditScheduleById['schedule']>;
 
@@ -95,7 +95,7 @@ const ScheduleForm = (props: ScheduleFormProps) => {
             <div className="rw-button">Invite</div>
           )}
           {props.schedule.confirmations.some(
-            (c) => c.player.id === currentUser.id && c.status === 'invited'
+            (c) => c.player.id === currentUser.id && c.status === 'invited',
           ) && <div className="rw-button">Confirm</div>}
         </div>
 

@@ -1,6 +1,5 @@
 import { SelectField } from '@redwoodjs/forms';
 import { Link } from '@redwoodjs/router';
-import { useState } from 'react';
 
 type ReferenceTarget = { id: string; name?: string };
 type Props = {
@@ -50,7 +49,9 @@ export const ReferenceTypeaheadSearchFormField = (props: Props) => {
     <div className="rw-segment rw-input">
       <SelectField name={name}>
         {(preloadedResults ?? []).map((r) => (
-          <option value={r.id}>{r.name}</option>
+          <option key={r.id} value={r.id}>
+            {r.name}
+          </option>
         ))}
       </SelectField>
     </div>

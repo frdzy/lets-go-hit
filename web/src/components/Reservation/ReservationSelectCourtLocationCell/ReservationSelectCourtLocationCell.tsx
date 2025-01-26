@@ -1,8 +1,10 @@
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
-import { ReferenceTypeaheadSearchFormField } from 'src/components/ReferenceTypeaheadSearchFormField';
 import { FindCourtLocations } from 'types/graphql';
-import { QUERY as ExistingQuery } from 'src/components/CourtLocation/CourtLocationsCell';
+
 import { routes } from '@redwoodjs/router';
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web';
+
+import { QUERY as ExistingQuery } from 'src/components/CourtLocation/CourtLocationsCell';
+import { ReferenceTypeaheadSearchFormField } from 'src/components/ReferenceTypeaheadSearchFormField';
 
 export const QUERY = ExistingQuery;
 
@@ -21,7 +23,7 @@ export const Success = ({
   defaultValue?: string;
 }) => {
   const existingCourtLocation = courtLocations.find(
-    (r) => r.id === defaultValue
+    (r) => r.id === defaultValue,
   );
   return (
     <ReferenceTypeaheadSearchFormField

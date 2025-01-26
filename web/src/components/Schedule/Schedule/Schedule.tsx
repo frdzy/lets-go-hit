@@ -1,16 +1,16 @@
-import { Link, routes, navigate } from '@redwoodjs/router';
-import { useMutation } from '@redwoodjs/web';
-import { toast } from '@redwoodjs/web/toast';
-import { useAuth } from 'src/auth';
-import { CreatorReference } from 'src/components/CreatorReference';
-import { Reference } from 'src/components/Reference';
-
-import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
-
 import type {
   DeleteScheduleMutationVariables,
   FindScheduleById,
 } from 'types/graphql';
+
+import { Link, routes, navigate } from '@redwoodjs/router';
+import { useMutation } from '@redwoodjs/web';
+import { toast } from '@redwoodjs/web/toast';
+
+import { useAuth } from 'src/auth';
+import { CreatorReference } from 'src/components/CreatorReference';
+import { Reference } from 'src/components/Reference';
+import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
 
 const DELETE_SCHEDULE_MUTATION = gql`
   mutation DeleteScheduleMutation($id: ID!) {
@@ -66,7 +66,7 @@ const Schedule = ({ schedule }: Props) => {
               <td>
                 <Reference
                   referenceTarget={getReferenceFromReservation(
-                    schedule.reservation
+                    schedule.reservation,
                   )}
                   routeToCreate={routes.newReservation}
                   routeToDetails={(id) => routes.reservation({ id: id })}
@@ -92,7 +92,7 @@ const Schedule = ({ schedule }: Props) => {
                 )}
                 {schedule.confirmations.some(
                   (c) =>
-                    c.player.id === currentUser.id && c.status === 'invited'
+                    c.player.id === currentUser.id && c.status === 'invited',
                 ) && <div className="rw-button">Confirm</div>}
               </td>
             </tr>

@@ -28,7 +28,7 @@ describe('courtLocations', () => {
       const result = await courtLocation({ id: scenario.courtLocation.one.id });
 
       expect(result).toEqual(scenario.courtLocation.one);
-    }
+    },
   );
 
   scenario('creates a courtLocation', async (scenario: StandardScenario) => {
