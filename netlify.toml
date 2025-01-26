@@ -22,3 +22,4 @@ functions = "api/dist/functions"
 
 [functions]
   external_node_modules = ["@simplewebauthn/server"]
+  node_bundler = "esbuild"
