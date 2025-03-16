@@ -27,6 +27,10 @@ export const QUERY = gql`
         player {
           id
           name
+          email
+        }
+        invitation {
+          email
         }
         status
       }

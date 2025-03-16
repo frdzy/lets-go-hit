@@ -6,11 +6,13 @@ import type {
 import { Link, routes, navigate } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast } from '@redwoodjs/web/toast';
+import { useState } from 'react';
 
 import { useAuth } from 'src/auth';
 import { CreatorReference } from 'src/components/CreatorReference';
 import { Reference } from 'src/components/Reference';
 import { getReferenceFromReservation, timeTag } from 'src/lib/formatters';
+import { InvitationForm } from 'src/components/Invitation/InvitationForm';
 
 const DELETE_SCHEDULE_MUTATION = gql`
   mutation DeleteScheduleMutation($id: ID!) {
@@ -37,6 +39,15 @@ const Schedule = ({ schedule }: Props) => {
     },
   });
 
+  const [showInvitationForm, setShowInvitationForm] = useState(false);
+
+  const onInviteClick = () => {
+    setShowInvitationForm(true);
+  };
+  const handleCloseInviteForm = () => {
+    setShowInvitationForm(false);
+  };
+
   const onDeleteClick = (id: DeleteScheduleMutationVariables['id']) => {
     if (confirm('Are you sure you want to delete schedule ' + id + '?')) {
       deleteSchedule({ variables: { id } });
@@ -45,6 +56,13 @@ const Schedule = ({ schedule }: Props) => {
 
   return (
     <>
+      {schedule.createdByUser.id === currentUser.id &&
+        (showInvitationForm ? (
+          <InvitationForm
+            scheduleId={schedule.id}
+            handleClose={handleCloseInviteForm}
+          />
+        ) : null)}
       <div className="rw-segment">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
@@ -74,25 +92,33 @@ const Schedule = ({ schedule }: Props) => {
               </td>
             </tr>
             <tr>
-              <th>Confirmations</th>
+              <th>
+                <div>Confirmations</div>
+                <div className="rw-button" onClick={onInviteClick}>
+                  Invite
+                </div>
+              </th>
               <td>
-                {schedule.confirmations.map((confirmation) => (
-                  <div key={confirmation.id}>
-                    <span>
-                      {(confirmation.player.name ?? 'Unnamed') +
-                        (confirmation.player.id === currentUser.id
-                          ? ' (you)'
-                          : '')}
-                    </span>{' '}
-                    <span>({confirmation.status ?? 'invited'})</span>
-                  </div>
-                ))}
-                {schedule.createdByUser.id === currentUser.id && (
-                  <div className="rw-button">Invite</div>
-                )}
+                {schedule.confirmations.map((confirmation) => {
+                  const displayName =
+                    (confirmation.player
+                      ? confirmation.player.name === ''
+                        ? confirmation.player.email
+                        : confirmation.player.name
+                      : confirmation.invitation?.email) +
+                    (confirmation.player?.id === currentUser.id
+                      ? ' (you)'
+                      : '');
+                  return (
+                    <div key={confirmation.id}>
+                      <span>{displayName}</span>{' '}
+                      <span>({confirmation.status ?? 'invited'})</span>
+                    </div>
+                  );
+                })}
                 {schedule.confirmations.some(
                   (c) =>
-                    c.player.id === currentUser.id && c.status === 'invited',
+                    c.player?.id === currentUser.id && c.status === 'invited',
                 ) && <div className="rw-button">Confirm</div>}
               </td>
             </tr>

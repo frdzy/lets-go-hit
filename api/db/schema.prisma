@@ -25,6 +25,7 @@ model User {
   reservations        Reservation[]
   createdSchedules    Schedule[]
   confirmations       Confirmation[]
+  invitations         Invitation[]
 }
 
 model UserCredential {
@@ -68,10 +69,26 @@ model Schedule {
 }
 
 model Confirmation {
-  id         String   @id @default(uuid())
-  player     User     @relation(fields: [playerId], references: [id])
-  playerId   String
-  status     String?
-  schedule   Schedule @relation(fields: [scheduleId], references: [id])
-  scheduleId String
+  id          String      @id @default(uuid())
+  targetType  String      @default("verified")
+  status      String?
+  player      User?       @relation(fields: [playerId], references: [id])
+  playerId    String?
+  manualName  String?
+  schedule    Schedule    @relation(fields: [scheduleId], references: [id])
+  scheduleId  String
+  createdTime DateTime    @default(now())
+  invitation  Invitation?
+}
+
+model Invitation {
+  id              String       @id @default(uuid())
+  email           String       @default("")
+  emailSuccess    Boolean      @default(false)
+  confirmationId  String       @unique
+  confirmation    Confirmation @relation(fields: [confirmationId], references: [id])
+  hashedCode      String
+  invitedByUser   User         @relation(fields: [invitedByUserId], references: [id])
+  invitedByUserId String
+  invitedTime     DateTime
 }

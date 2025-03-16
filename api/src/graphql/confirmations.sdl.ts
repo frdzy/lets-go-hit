@@ -6,11 +6,12 @@ export const schema = gql`
 
   type Confirmation {
     id: ID!
-    player: User!
-    playerId: ID!
+    player: User
+    playerId: ID
     status: ConfirmationStatus!
     schedule: Schedule!
     scheduleId: ID!
+    invitation: Invitation
   }
 
   type Query {
@@ -27,7 +28,21 @@ export const schema = gql`
     scheduleId: ID
   }
 
+  type Invitation {
+    id: ID!
+    email: String!
+    invitedByUser: User!
+    invitedTime: DateTime!
+  }
+
+  input CreateInvitationInput {
+    scheduleId: ID!
+    invitedUserEmail: String!
+    invitedUserName: String!
+  }
+
   type Mutation {
+    createInvitation(input: CreateInvitationInput!): Confirmation! @requireAuth
     createConfirmation(input: CreateConfirmationInput!): Confirmation!
       @requireAuth
     updateConfirmation(id: ID!, input: UpdateConfirmationInput!): Confirmation!
