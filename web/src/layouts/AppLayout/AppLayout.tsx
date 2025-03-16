@@ -50,7 +50,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           <NavLink
             key={o.label}
             className="mx-3"
-            activeClassName="activeLink"
+            activeClassName="mx-3 activeLink"
             to={o.to}
           >
             {o.label}
