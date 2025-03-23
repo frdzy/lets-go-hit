@@ -29,4 +29,8 @@ export const standard = defineScenario<Prisma.ConfirmationCreateArgs>({
   },
 });
 
-export type StandardScenario = ScenarioData<Confirmation, 'confirmation'>;
+export type StandardScenario = ScenarioData<
+  Confirmation,
+  'confirmation',
+  'one' | 'two'
+>;

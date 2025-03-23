@@ -6,6 +6,7 @@ import type {
 
 import { db } from 'src/lib/db';
 import { getRequiredCurrentUser } from 'src/lib/post_auth';
+import { removeNulls } from '@redwoodjs/api';
 
 export const schedules: QueryResolvers['schedules'] = async (input) => {
   const currentUser = getRequiredCurrentUser();
@@ -59,7 +60,7 @@ export const updateSchedule: MutationResolvers['updateSchedule'] = ({
   input,
 }) => {
   return db.schedule.update({
-    data: input,
+    data: removeNulls(input),
     where: { id },
   });
 };
@@ -82,9 +83,13 @@ export const Schedule: ScheduleRelationResolvers = {
     return db.schedule.findUnique({ where: { id: root?.id } }).reservation();
   },
   createdByUser: (_obj, { root }) => {
-    return db.schedule.findUnique({ where: { id: root?.id } }).createdByUser();
+    return db.schedule
+      .findUniqueOrThrow({ where: { id: root?.id } })
+      .createdByUser();
   },
   confirmations: (_obj, { root }) => {
-    return db.schedule.findUnique({ where: { id: root?.id } }).confirmations();
+    return db.schedule
+      .findUniqueOrThrow({ where: { id: root?.id } })
+      .confirmations();
   },
 };

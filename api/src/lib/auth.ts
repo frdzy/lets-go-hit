@@ -12,6 +12,11 @@ import { db } from './db';
  */
 export const cookieName = 'session_%port%';
 
+interface MyCurrentUser {
+  id: string;
+  email: string;
+  [k: string]: unknown;
+}
 /**
  * The session object sent in as the first argument to getCurrentUser() will
  * have a single key `id` containing the unique ID of the logged in user
@@ -29,7 +34,9 @@ export const cookieName = 'session_%port%';
  * fields to the `select` object below once you've decided they are safe to be
  * seen if someone were to open the Web Inspector in their browser.
  */
-export const getCurrentUser = async (session: Decoded) => {
+export const getCurrentUser = async (
+  session: Decoded,
+): Promise<MyCurrentUser | null> => {
   if (!session || typeof session.id !== 'string') {
     throw new Error('Invalid session');
   }

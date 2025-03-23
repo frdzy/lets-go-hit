@@ -23,4 +23,8 @@ export const standard = defineScenario<Prisma.ReservationCreateArgs>({
   },
 });
 
-export type StandardScenario = ScenarioData<Reservation, 'reservation'>;
+export type StandardScenario = ScenarioData<
+  Reservation,
+  'reservation',
+  'one' | 'two'
+>;

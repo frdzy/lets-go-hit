@@ -19,4 +19,8 @@ export const standard = defineScenario<Prisma.ScheduleCreateArgs>({
   },
 });
 
-export type StandardScenario = ScenarioData<Schedule, 'schedule'>;
+export type StandardScenario = ScenarioData<
+  Schedule,
+  'schedule',
+  'one' | 'two'
+>;

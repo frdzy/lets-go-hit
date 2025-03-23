@@ -4,6 +4,8 @@ import type {
   ConfirmationRelationResolvers,
 } from 'types/graphql';
 
+import { removeNulls } from '@redwoodjs/api';
+
 import { db } from 'src/lib/db';
 import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
@@ -31,7 +33,7 @@ export const updateConfirmation: MutationResolvers['updateConfirmation'] = ({
   input,
 }) => {
   return db.confirmation.update({
-    data: input,
+    data: removeNulls(input),
     where: { id },
   });
 };
@@ -46,10 +48,14 @@ export const deleteConfirmation: MutationResolvers['deleteConfirmation'] = ({
 
 export const Confirmation: ConfirmationRelationResolvers = {
   player: (_obj, { root }) => {
-    return db.confirmation.findUnique({ where: { id: root?.id } }).player();
+    return db.confirmation
+      .findUniqueOrThrow({ where: { id: root?.id } })
+      .player();
   },
   schedule: (_obj, { root }) => {
-    return db.confirmation.findUnique({ where: { id: root?.id } }).schedule();
+    return db.confirmation
+      .findUniqueOrThrow({ where: { id: root?.id } })
+      .schedule();
   },
   status: (_obj, { root }) => {
     return root.status === 'confirmed' ? root.status : 'invited';

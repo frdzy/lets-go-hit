@@ -4,6 +4,8 @@ import type {
   ReservationRelationResolvers,
 } from 'types/graphql';
 
+import { removeNulls } from '@redwoodjs/api';
+
 import { db } from 'src/lib/db';
 import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
@@ -88,7 +90,7 @@ export const updateReservation: MutationResolvers['updateReservation'] = ({
   input,
 }) => {
   return db.reservation.update({
-    data: input,
+    data: removeNulls(input),
     where: { id },
   });
 };
@@ -104,13 +106,17 @@ export const deleteReservation: MutationResolvers['deleteReservation'] = ({
 export const Reservation: ReservationRelationResolvers = {
   courtLocation: (_obj, { root }) => {
     return db.reservation
-      .findUnique({ where: { id: root?.id } })
+      .findUniqueOrThrow({ where: { id: root?.id } })
       .courtLocation();
   },
   byUser: (_obj, { root }) => {
-    return db.reservation.findUnique({ where: { id: root?.id } }).byUser();
+    return db.reservation
+      .findUniqueOrThrow({ where: { id: root?.id } })
+      .byUser();
   },
   schedules: (_obj, { root }) => {
-    return db.reservation.findUnique({ where: { id: root?.id } }).schedules();
+    return db.reservation
+      .findUniqueOrThrow({ where: { id: root?.id } })
+      .schedules();
   },
 };
