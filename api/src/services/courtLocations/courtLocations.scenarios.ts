@@ -9,4 +9,8 @@ export const standard = defineScenario<Prisma.CourtLocationCreateArgs>({
   },
 });
 
-export type StandardScenario = ScenarioData<CourtLocation, 'courtLocation'>;
+export type StandardScenario = ScenarioData<
+  CourtLocation,
+  'courtLocation',
+  'one' | 'two'
+>;

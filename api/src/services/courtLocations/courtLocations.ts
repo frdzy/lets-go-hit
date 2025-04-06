@@ -4,6 +4,8 @@ import type {
   CourtLocationRelationResolvers,
 } from 'types/graphql';
 
+import { removeNulls } from '@redwoodjs/api';
+
 import { db } from 'src/lib/db';
 import { getRequiredCurrentUser } from 'src/lib/post_auth';
 
@@ -32,7 +34,7 @@ export const updateCourtLocation: MutationResolvers['updateCourtLocation'] = ({
   input,
 }) => {
   return db.courtLocation.update({
-    data: input,
+    data: removeNulls(input),
     where: { id },
   });
 };
@@ -47,11 +49,13 @@ export const deleteCourtLocation: MutationResolvers['deleteCourtLocation'] = ({
 
 export const CourtLocation: CourtLocationRelationResolvers = {
   addedBy: (_obj, { root }) => {
-    return db.courtLocation.findUnique({ where: { id: root?.id } }).addedBy();
+    return db.courtLocation
+      .findUniqueOrThrow({ where: { id: root?.id } })
+      .addedBy();
   },
   reservations: (_obj, { root }) => {
     return db.courtLocation
-      .findUnique({ where: { id: root?.id } })
+      .findUniqueOrThrow({ where: { id: root?.id } })
       .reservations();
   },
 };

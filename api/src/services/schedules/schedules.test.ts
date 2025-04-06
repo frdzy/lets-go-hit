@@ -17,7 +17,7 @@ import type { StandardScenario } from './schedules.scenarios';
 
 describe('schedules', () => {
   scenario('returns all schedules', async (scenario: StandardScenario) => {
-    const result = await schedules();
+    const result = await schedules({});
 
     expect(result.length).toEqual(Object.keys(scenario.schedule).length);
   });
@@ -40,7 +40,7 @@ describe('schedules', () => {
     });
 
     expect(result.beginTimestamp).toEqual(new Date('2022-12-04T23:27:17.813Z'));
-    expect(result.createdByUser.id).toEqual(
+    expect(result.createdByUser?.id).toEqual(
       scenario.schedule.two.createdByUserId,
     );
   });
