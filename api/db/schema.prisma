@@ -2,24 +2,24 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-  id                  String  @id @default(uuid())
-  email               String  @unique
-  name                String  @default("")
-  hashedPassword      String  @default("")
-  salt                String  @default("")
+  id                  String           @id @default(uuid())
+  email               String           @unique
+  name                String           @default("")
+  hashedPassword      String           @default("")
+  salt                String           @default("")
   resetToken          String?
   resetTokenExpiresAt DateTime?
-  webAuthnChallenge   String? @unique
+  webAuthnChallenge   String?          @unique
   credentials         UserCredential[]
   courtLocationsAdded CourtLocation[]
   reservations        Reservation[]
@@ -36,24 +36,23 @@ model UserCredential {
   counter    BigInt
 }
 
-
 model CourtLocation {
-  id              String  @id @default(uuid())
-  name            String
-  address         String?
-  notes           String?
-  addedBy         User?   @relation(fields: [addedById], references: [id])
-  addedById       String?
-  reservations    Reservation[]
+  id           String        @id @default(uuid())
+  name         String
+  address      String?
+  notes        String?
+  addedBy      User?         @relation(fields: [addedById], references: [id])
+  addedById    String?
+  reservations Reservation[]
 }
 
 model Reservation {
-  id              String         @id @default(uuid())
+  id              String        @id @default(uuid())
   beginTimestamp  DateTime
   endTimestamp    DateTime
-  courtLocation   CourtLocation  @relation(fields: [courtLocationId], references: [id])
+  courtLocation   CourtLocation @relation(fields: [courtLocationId], references: [id])
   courtLocationId String
-  byUser          User           @relation(fields: [byUserId], references: [id])
+  byUser          User          @relation(fields: [byUserId], references: [id])
   byUserId        String
   schedules       Schedule[]
 }
@@ -69,10 +68,10 @@ model Schedule {
 }
 
 model Confirmation {
-  id            String           @id @default(uuid())
-  player        User             @relation(fields: [playerId], references: [id])
-  playerId      String
-  status        String?
-  schedule      Schedule         @relation(fields: [scheduleId], references: [id])
-  scheduleId    String
+  id         String   @id @default(uuid())
+  player     User     @relation(fields: [playerId], references: [id])
+  playerId   String
+  status     String?
+  schedule   Schedule @relation(fields: [scheduleId], references: [id])
+  scheduleId String
 }
