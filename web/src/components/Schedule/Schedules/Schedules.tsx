@@ -77,7 +77,7 @@ const SchedulesList = ({ schedules }: FindSchedules) => {
               <td>
                 {schedule.confirmations.map((confirmation) => (
                   <div key={confirmation.id}>
-                    <span>{confirmation.player.name ?? 'Unnamed'}</span>{' '}
+                    <span>{confirmation.player?.name ?? 'Unnamed'}</span>{' '}
                     <span>({confirmation.status ?? 'invited'})</span>
                   </div>
                 ))}

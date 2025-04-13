@@ -8,6 +8,8 @@
     "@redwoodjs/auth-dbauth-api": "8.4.0",
     "@redwoodjs/graphql-server": "8.4.0",
     "@simplewebauthn/server": "^7.4.0",
-    "prisma": "^5.22.0"
+    "nanoid": "3",
+    "prisma": "^5.22.0",
+    "resend": "^4.2.0"
   }
 }

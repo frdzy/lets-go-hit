@@ -85,8 +85,8 @@ const ScheduleForm = (props: ScheduleFormProps) => {
           {props.schedule.confirmations.map((confirmation) => (
             <div key={confirmation.id}>
               <span>
-                {(confirmation.player.name ?? 'Unnamed') +
-                  (confirmation.player.id === currentUser.id ? ' (you)' : '')}
+                {(confirmation.player?.name ?? 'Unnamed') +
+                  (confirmation.player?.id === currentUser.id ? ' (you)' : '')}
               </span>{' '}
               <span>({confirmation.status ?? 'invited'})</span>
             </div>
@@ -95,7 +95,7 @@ const ScheduleForm = (props: ScheduleFormProps) => {
             <div className="rw-button">Invite</div>
           )}
           {props.schedule.confirmations.some(
-            (c) => c.player.id === currentUser.id && c.status === 'invited',
+            (c) => c.player?.id === currentUser.id && c.status === 'invited',
           ) && <div className="rw-button">Confirm</div>}
         </div>
 

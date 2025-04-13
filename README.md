@@ -24,6 +24,11 @@ TODOs:
 - [x] Replace /schedules view of "Reservation id" with a Reservation cell
 - [x] Also replace other reference-type cells
 - [x] Order Schedules and Reservations entries by time descending
+- [x] Invite flow: UI, send email, code flow, confirmation flow
+  - [x] UI
+  - [x] Send email
+  - [x] Code flow
+  - [ ] Confirmation flow
 - [ ] "Attach" feature to search for a Reference
 - [ ] On narrow viewports (e.g. vertical phone screen), improve table-of-objects UI
 
